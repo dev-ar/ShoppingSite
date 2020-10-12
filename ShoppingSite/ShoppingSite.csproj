@@ -124,6 +124,9 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\aa\" />
+    <Folder Include="Views\ga\" />
+    <Folder Include="Views\sa\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">
