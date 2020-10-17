@@ -29,10 +29,11 @@ namespace Domain
         [MaxLength(200)]
         [DisplayName("ایمیل")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        public string Eamil { get; set; }
+        public string Email { get; set; }
 
         [DisplayName("کد فعالسازی")]
         [MaxLength(200)]
+        [Required]
         public string ActiveCode { get; set; }
 
         [Required]
@@ -41,6 +42,10 @@ namespace Domain
         [DisplayName("تاریخ ثبت‌نام")]
         [Required]
         public DateTime RegisterDate { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string LastLoginIp { get; set; }
 
         [Required]
         public DateTime LastLoginDate { get; set; }

@@ -16,12 +16,12 @@ namespace Domain
         [Required]
         public int ProductId { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(100)]
         [DisplayName("نام کاربری")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DisplayName("ایمیل")]
         [MaxLength(150)]
         public string Email { get; set; }
@@ -30,12 +30,12 @@ namespace Domain
         [MaxLength(150)]
         public string WebSite { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(800)]
         [DisplayName("نظر")]
         public string Text { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DisplayName("تاریخ ثبت نظر")]
         public DateTime CreateDate { get; set; }
         public int? ParentId { get; set; }

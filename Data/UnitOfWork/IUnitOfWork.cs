@@ -24,6 +24,7 @@ namespace Data
         GenericRepository<ProductComments> ProductCommentsRepository { get; }
         GenericRepository<SiteVisit> SiteVisitRepository { get; }
         GenericRepository<Slider> SliderRepository { get; }
+        CustomRepository CustomRepository { get; }
         void Save();
         void Dispose();
     }

@@ -107,7 +107,9 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\Style1.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\Vazir.svg" />
     <Content Include="Content\fonts\yekannumbers.svg" />
     <Content Include="Content\fonts\yekanweb.svg" />
     <Content Include="Content\img\1.jpg" />
@@ -148,6 +150,9 @@
     <Content Include="Content\fonts\yekanweb.eot" />
     <Content Include="Content\fonts\yekanweb.ttf" />
     <Content Include="Content\fonts\yekanweb.woff" />
+    <Content Include="Content\fonts\Vazir.ttf" />
+    <Content Include="Content\fonts\Vazir.eot" />
+    <Content Include="Content\fonts\Vazir.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -166,6 +171,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -177,6 +184,13 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_DefaultLayout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Slider.cshtml" />
+    <Content Include="Views\Accounts\Register.cshtml" />
+    <Content Include="Views\Accounts\SuccessRegister.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -189,11 +203,7 @@
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\aa\" />
-    <Folder Include="Views\ga\" />
-    <Folder Include="Views\sa\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">
@@ -203,6 +213,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{aada5bb8-c0fb-4da7-a344-cc6274e0f2e5}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{afd06415-1372-44bf-869a-1799f940c7f6}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

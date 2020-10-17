@@ -58,12 +58,23 @@
     <Compile Include="Migrations\202010111253245_Initial_DB.designer.cs">
       <DependentUpon>202010111253245_Initial_DB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010141803087_adding-IP-Active.cs" />
+    <Compile Include="Migrations\202010141803087_adding-IP-Active.designer.cs">
+      <DependentUpon>202010141803087_adding-IP-Active.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010141812266_Correcting-Words.cs" />
+    <Compile Include="Migrations\202010141812266_Correcting-Words.designer.cs">
+      <DependentUpon>202010141812266_Correcting-Words.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CustomRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\ICustomRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="ViewModels\AccountViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -78,6 +89,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010111253245_Initial_DB.resx">
       <DependentUpon>202010111253245_Initial_DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010141803087_adding-IP-Active.resx">
+      <DependentUpon>202010141803087_adding-IP-Active.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010141812266_Correcting-Words.resx">
+      <DependentUpon>202010141812266_Correcting-Words.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

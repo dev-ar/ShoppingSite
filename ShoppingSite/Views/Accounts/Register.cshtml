@@ -1,0 +1,60 @@
+﻿@using System.Web.UI.WebControls
+@model Data.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+    <div class="col-md-9 col-sm-8 left-side-content internal-style" id="Register">
+
+        <section class="border-radius">
+            <header><h2>  ساخت حساب کاربری جدید </h2></header>
+            <article>
+                <div class="col-md-10 col-sm-10 col-xs-12" id="Registerfrm">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "نام کاربری"} })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "ایمیل" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "رمز عبور" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.PasswordConfirmation, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "تأیید رمز عبور" } })
+                            @Html.ValidationMessageFor(model => model.PasswordConfirmation, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <input id="frm-input" type="submit" value="ثبت ‌نام" class="btn btn-default" />
+                        </div>
+                    }
+                </div>
+                <div class="clearfix"></div>
+            </article>
+        </section>
+    </div>
+<div class="clearfix"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

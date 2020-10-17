@@ -15,20 +15,20 @@ namespace Domain
         public int ProductId { get; set; }
 
         [DisplayName("عنوان")]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(300)]
         public string ProductTitle { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(500)]
         [DisplayName("توضیح مختصر")]
         public string ShortDescription { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DisplayName("توضیحات")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DisplayName("قیمت")]
         public int Price { get; set; }
 

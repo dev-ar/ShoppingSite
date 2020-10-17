@@ -13,7 +13,7 @@ namespace Domain
         [Key]
         public int FeatureId { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DisplayName("ویژگی‌ها")]
         [MaxLength(200)]
         public string FeatureTitle { get; set; }

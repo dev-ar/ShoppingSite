@@ -15,15 +15,15 @@ namespace Domain
 
 
         [DisplayName("کالا")]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public int ProductId { get; set; }
 
         [DisplayName("ویژگی")]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public int FeatureId { get; set; }
 
         [DisplayName("مقدار")]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public string Value { get; set; }
 
         public virtual Features Features { get; set; }

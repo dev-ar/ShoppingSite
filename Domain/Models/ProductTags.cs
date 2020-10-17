@@ -17,7 +17,7 @@ namespace Domain
         public int ProductId { get; set; }
 
         [DisplayName("کلمات کلیدی")]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(250)]
         public string Tag { get; set; }
 

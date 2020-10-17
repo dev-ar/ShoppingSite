@@ -19,7 +19,7 @@ namespace Domain
         [Required]
         public int ProductId { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DisplayName("قیمت")]
         public int Price { get; set; }
 

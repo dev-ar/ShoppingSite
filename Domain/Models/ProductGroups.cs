@@ -14,7 +14,7 @@ namespace Domain
         public int GroupId { get; set; }
 
         [DisplayName("عنوان گروه")]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(400)]
         public string GroupTitle { get; set; }
         public int? ParentId { get; set; }

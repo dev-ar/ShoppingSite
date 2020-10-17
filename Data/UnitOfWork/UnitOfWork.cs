@@ -43,6 +43,10 @@ namespace Data
         public GenericRepository<ProductComments> ProductCommentsRepository { get; }
         public GenericRepository<SiteVisit> SiteVisitRepository { get; }
         public GenericRepository<Slider> SliderRepository { get; }
+
+        private CustomRepository _customRepository;
+        public CustomRepository CustomRepository => _customRepository ??= new CustomRepository(db); 
+
         public void Save()
         {
             db.SaveChanges();

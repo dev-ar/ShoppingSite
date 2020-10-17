@@ -19,7 +19,7 @@ namespace Domain
 
         [DisplayName("عنوان")]
         [MaxLength(250)]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public string GalleryTitle { get; set; }
 
         [Required]

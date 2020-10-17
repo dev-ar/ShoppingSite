@@ -14,12 +14,12 @@ namespace Domain
         public int SliderId { get; set; }
 
         [DisplayName("عنوان")]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(300)]
         public string SliderTitle { get; set; }
 
         [DisplayName("تصویر")]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public string ImageName { get; set; }
 
         [DisplayName("تاریخ شروع")]
@@ -37,7 +37,7 @@ namespace Domain
         public bool IsActive { get; set; }
 
         [DisplayName("عنوان")]
-        [Required(ErrorMessage = "لطفا {0} را وادر کنید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [Url(ErrorMessage = "آدرس وارد شده معتبر نمی‌باشد.")]
         [MaxLength(450)]
         public string Url { get; set; }
