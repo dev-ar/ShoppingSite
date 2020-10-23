@@ -35,6 +35,18 @@ namespace Data
 
     public class LoginViewModel
     {
+        [DisplayName("نام کاربری")]
+        [MaxLength(50)]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        public string UserName { get; set; }
 
+        [DisplayName("رمز عبور")]
+        [MaxLength(50)]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [DisplayName("مرا به خاطر بسپار")]
+        public bool RememberMe { get; set; }
     }
 }

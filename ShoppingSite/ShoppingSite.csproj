@@ -173,6 +173,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageEmailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +192,10 @@
     <Content Include="Views\Home\Slider.cshtml" />
     <Content Include="Views\Accounts\Register.cshtml" />
     <Content Include="Views\Accounts\SuccessRegister.cshtml" />
+    <Content Include="Views\ManageEmails\ActivationEmail.cshtml" />
+    <Content Include="Views\Accounts\ActiveUser.cshtml" />
+    <Content Include="Views\Accounts\Login.cshtml" />
+    <Content Include="Views\Accounts\test.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
