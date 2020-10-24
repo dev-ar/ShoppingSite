@@ -9,8 +9,8 @@ namespace Data
 {
     public interface ICustomRepository
     {
-        char ExistCheck(string username,string email);
+        bool ExistCheck(string email);
         Users ActiveCodeCheck(string id);
-        bool LoginCheck(string username, string password);
+        bool LoginCheck(string email, string password);
     }
 }

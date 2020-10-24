@@ -35,10 +35,10 @@ namespace Data
 
     public class LoginViewModel
     {
-        [DisplayName("نام کاربری")]
+        [DisplayName("ایمیل")]
         [MaxLength(50)]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         [DisplayName("رمز عبور")]
         [MaxLength(50)]
