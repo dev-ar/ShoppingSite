@@ -56,6 +56,7 @@ body {
 }
 
 /***********Default setting************/
+
 a, i, form button, .last-products article > div > div .buy-button {
     outline: none;
     text-decoration: none;
@@ -303,6 +304,7 @@ a, span, label, i, p, div {
                 .mega-menu .container > ul > li > a:hover {
                     color: #EE2D2D
                 }
+
 
 .form-search {
     width: 45px;

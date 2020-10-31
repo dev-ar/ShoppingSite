@@ -162,7 +162,7 @@ namespace ShoppingSite.Controllers
         [HttpPost]
         [Route("RecoveryPassword/{id}")]
         [ValidateAntiForgeryToken]
-        public ActionResult RecoveryPassword(string id,RecoveryPasswordViewModel model)
+        public ActionResult RecoveryPassword(string id,[Bind(Include = "Password,PasswordConfirmation")]RecoveryPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {

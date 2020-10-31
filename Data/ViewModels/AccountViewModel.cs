@@ -42,9 +42,9 @@ namespace Data
         public string Email { get; set; }
 
         [DisplayName("رمز عبور")]
-        [MaxLength(50)]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DataType(DataType.Password)]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "رمز عبور شما باید بین ۶ تا ۲۰ کاراکتر باشد.")]
         public string Password { get; set; }
 
         [DisplayName("مرا به خاطر بسپار")]
@@ -72,6 +72,29 @@ namespace Data
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "رمزهای عبور یکسان نیست.")]
+        public string PasswordConfirmation { get; set; }
+    }
+
+    public class ChangePasswordViewModel
+    {
+        [DisplayName("رمز عبور فعلی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [DataType(DataType.Password)]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "رمز عبور شما باید بین ۸ تا ۲۰ کاراکتر باشد.")]
+        public string OldPassword { get; set; }
+
+
+        [DisplayName("رمز عبور جدید")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [DataType(DataType.Password)]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "رمز عبور شما باید بیشتر از کاراکتر باشد.")]
+        public string Password { get; set; }
+
+        [DisplayName("تأیید رمز عبور جدید")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "رمزهای عبور یکسان نیست.")]
+        [StringLength( 20, MinimumLength = 8, ErrorMessage = "رمز عبور شما باید بیشتر از کاراکتر باشد.")]
         public string PasswordConfirmation { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@{
     if (User.Identity.IsAuthenticated)
     {
-        <li><a href=""><i class="fa fa-user"></i> <label>حساب کاربری</label> </a></li>
+        <li><a href="/user/userinfo"><i class="fa fa-user"></i> <label>حساب کاربری</label> </a></li>
         <li><a href="/LogOff"><i class="fa fa-sign-out"></i> <label>خروج</label> </a></li>
     }
     else

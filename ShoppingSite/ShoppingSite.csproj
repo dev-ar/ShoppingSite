@@ -903,43 +903,7 @@
     <Content Include="Areas\Admin\Content\alter\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Areas\Admin\Content\alter\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Areas\Admin\Content\bootstrap-rtl.min.css" />
-    <Content Include="Areas\Admin\Content\bower_Components\font-awesome.min.css" />
-    <Content Include="Areas\Admin\Content\bower_Components\ionicons.min.css" />
-    <Content Include="Areas\Admin\Content\dist\js\adminlte.min.js" />
-    <Content Include="Areas\Admin\Content\dist\js\bootstrap.min.js" />
-    <Content Include="Areas\Admin\Content\dist\css\AdminLTE.css" />
-    <Content Include="Areas\Admin\Content\dist\css\bootstrap-theme.css" />
-    <Content Include="Areas\Admin\Content\dist\css\img\avatar.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\avatar04.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\avatar2.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\avatar3.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\avatar5.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\boxed-bg.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\boxed-bg.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\credit\american-express.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\credit\cirrus.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\credit\mastercard.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\credit\mestro.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\credit\paypal.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\credit\paypal2.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\credit\visa.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\default-50x50.gif" />
-    <Content Include="Areas\Admin\Content\dist\css\img\icons.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\photo1.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\photo2.png" />
-    <Content Include="Areas\Admin\Content\dist\css\img\photo3.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\photo4.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\user1-128x128.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\user2-160x160.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\user3-128x128.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\user4-128x128.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\user5-128x128.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\user6-128x128.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\user7-128x128.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\img\user8-128x128.jpg" />
-    <Content Include="Areas\Admin\Content\dist\css\rtl.css" />
-    <Content Include="Areas\Admin\Content\dist\css\skin-blue.min.css" />
-    <Content Include="Areas\Admin\Content\dist\Jquery\jquery.min.js" />
+    <Content Include="Scripts\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -1122,6 +1086,12 @@
     <Content Include="Areas\Admin\Content\alter\plugins\popper\umd\popper.js.map" />
     <Content Include="Areas\Admin\Content\alter\plugins\popper\umd\popper.min.js.map" />
     <Content Include="Areas\Admin\Views\Users\AdminUserName.cshtml" />
+    <Content Include="Areas\User\Views\web.config" />
+    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\User\Views\UserAccount\ChangePassword.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Areas\User\Views\UserAccount\UserInfo.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1141,6 +1111,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\User\Controllers\UserAccountController.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageEmailsController.cs" />
@@ -1181,8 +1153,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Content\Plugins\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\User\Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

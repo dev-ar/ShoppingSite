@@ -9,7 +9,6 @@ namespace ShoppingSite.Controllers
     public class tstController : Controller
     {
         // GET: tst
-        [Authorize(Roles = "admin")]
         public ActionResult test()
         {
             return View();
