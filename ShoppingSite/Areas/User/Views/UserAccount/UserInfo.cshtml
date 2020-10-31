@@ -1,4 +1,4 @@
-﻿
+﻿@model Domain.Users
 @{
     ViewBag.Title = "UserInfo";
 }
@@ -12,13 +12,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">نام کاربری</div>
                 <div class="panel-body">
-                    امیررضا خلیلی
+                     @Model.UserName
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">ایمیل</div>
                 <div class="panel-body">
-                    amir.reza487@gmail.com
+                    @Model.Email
                 </div>
             </div>
             <a class="btn btn-primary" href="/user/edit">ویرایش اطلاعات کاربری</a>

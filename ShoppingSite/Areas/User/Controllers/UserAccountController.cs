@@ -18,10 +18,14 @@ namespace ShoppingSite.Areas.User.Controllers
         [Route("UserInfo")]
         public ActionResult UserInfo()
         {
-            return View();
+            return View(db.AccountRepository.GetUserByEmail(User.Identity.Name));
         }
 
-
+        public ActionResult GetUserName()
+        {
+            ViewBag.Username = db.AccountRepository.GetUserNameByEmail(User.Identity.Name);
+            return PartialView();
+        }
 
         [Route("ChangePassword")]
         public ActionResult ChangePassword()
