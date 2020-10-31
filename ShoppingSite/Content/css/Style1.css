@@ -48,8 +48,8 @@ body {
 }
 
 #frm-input {
-    width: 25%;
-    margin-right: 17%;
+    background-color: dodgerblue;
+    width: 60%;
 }
 #search {
     width: 75%;

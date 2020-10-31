@@ -44,8 +44,8 @@ namespace Data
         public GenericRepository<SiteVisit> SiteVisitRepository { get; }
         public GenericRepository<Slider> SliderRepository { get; }
 
-        private CustomRepository _customRepository;
-        public CustomRepository CustomRepository => _customRepository ??= new CustomRepository(db); 
+        private AccountRepository _accountRepository;
+        public AccountRepository AccountRepository => _accountRepository ??= new AccountRepository(db); 
 
         public void Save()
         {

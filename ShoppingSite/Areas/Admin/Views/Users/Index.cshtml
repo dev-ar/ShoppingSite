@@ -3,12 +3,18 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@section PageHeaders
+{
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">مدیریت کاربران </h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="#">خانه</a></li>
+            <li class="breadcrumb-item active">صفحه سریع</li>
+        </ol>
+    </div><!-- /.col -->
+}
 <table class="table">
     <tr>
         <th>
@@ -18,13 +24,7 @@
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActiveCode)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
@@ -32,9 +32,7 @@
         <th>
             @Html.DisplayNameFor(model => model.RegisterDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastLoginIp)
-        </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.LastLoginDate)
         </th>
@@ -50,13 +48,7 @@
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActiveCode)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsActive)
@@ -64,16 +56,20 @@
         <td>
             @Html.DisplayFor(modelItem => item.RegisterDate)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastLoginIp)
-        </td>
+   
         <td>
             @Html.DisplayFor(modelItem => item.LastLoginDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+            <a class=" btn btn-warning" href="Users/Edit/@item.UserId">
+                <i class="fa fa-edit"></i>
+            </a>
+             <a class="btn btn-info" href="Users/Details/@item.UserId">
+                 <i class="fa fa-info"></i>
+             </a> 
+             <a class="btn btn-danger" href="Users/Delete/@item.UserId">
+                 <i class="fa fa-trash"></i>
+             </a> 
         </td>
     </tr>
 }

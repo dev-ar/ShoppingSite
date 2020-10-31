@@ -5,12 +5,12 @@
     ViewBag.Title = "Register";
 }
 
-    <div class="col-md-9 col-sm-8 left-side-content internal-style" id="Register">
+    <div class="col-md-9 col-sm-8 left-side-content internal-style"style="width: 100%">
 
         <section class="border-radius">
             <header><h2>  ساخت حساب کاربری جدید </h2></header>
             <article>
-                <div class="col-md-10 col-sm-10 col-xs-12" id="Registerfrm">
+                <div class="col-md-10 col-sm-10 col-xs-12">
 
                     @using (Html.BeginForm())
                     {
@@ -34,7 +34,7 @@
                             @Html.ValidationMessageFor(model => model.PasswordConfirmation, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
-                            <input style="background-color: dodgerblue " id="frm-input" type="submit" value="ثبت ‌نام" class="btn btn-default" />
+                            <input id="frm-input" type="submit" value="ثبت ‌نام" class="btn btn-default" />
                         </div>
                     }
                 </div>

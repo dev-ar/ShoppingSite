@@ -37,7 +37,7 @@ namespace ShoppingSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.CustomRepository.ExistCheck(register.Email))
+                if (db.AccountRepository.ExistCheck(register.Email))
                 {
                     var user = new Users()
                     {
@@ -84,9 +84,9 @@ namespace ShoppingSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.CustomRepository.LoginCheck(login.Email, login.Password))
+                if (db.AccountRepository.LoginCheck(login.Email, login.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(login.Email, login.RememberMe);
+                    FormsAuthentication.SetAuthCookie(login.Email.Trim().ToLower(), login.RememberMe);
                     return Redirect(ReturnUrl);
                 }
             }
@@ -108,16 +108,71 @@ namespace ShoppingSite.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword([Bind(Include = "Email")] ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var user = db.AccountRepository.GetUserByEmail(model.Email);
+                if (user != null)
+                {
+                    if (user.IsActive)
+                    {
+                        var body = PartialToStringClass.RenderPartialView("ManageEmails", "RecoveryPassword", user);
+                        SendEmail.Send(user.Email,"بازیابی رمز عبور",body);
+                        ViewBag.IsSuccess = true;
+                        return View();
+                    }
+                    ModelState.AddModelError("Email", "حساب کاربری وارد شده فعال نیست.");
+                    return View();
+                }
+                ModelState.AddModelError("Email", "کاربری با این مشخصات یافت نشد");
+                return View();
+            }
+            return View();
+        }
+
+
         [Route("ActiveUser/{id}")]
         public ActionResult ActiveUser(string id)
         {
-            var user = db.CustomRepository.ActiveCodeCheck(id);
+            var user = db.AccountRepository.ActiveCodeCheck(id);
             if (user == null)
                 return HttpNotFound();
             user.IsActive = true;
             user.ActiveCode = Guid.NewGuid().ToString();
             db.Save();
             ViewBag.UserName = user.UserName;
+            return View();
+        }
+
+        [Route("RecoveryPassword/{id}")]
+        public ActionResult RecoveryPassword(string id)
+        {
+            var user = db.AccountRepository.ActiveCodeCheck(id);
+            if (user == null)
+                return HttpNotFound();
+            return View();
+        }
+
+        [HttpPost]
+        [Route("RecoveryPassword/{id}")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RecoveryPassword(string id,RecoveryPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.AccountRepository.ActiveCodeCheck(id);
+                user.Password = model.Password.HashPassword();
+                user.ActiveCode = Guid.NewGuid().ToString();
+                db.Save();
+                return Redirect("/Login?recovery=true");
+            }
+
             return View();
         }
     }

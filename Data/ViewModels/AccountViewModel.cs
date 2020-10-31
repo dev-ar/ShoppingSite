@@ -38,6 +38,7 @@ namespace Data
         [DisplayName("ایمیل")]
         [MaxLength(50)]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [EmailAddress(ErrorMessage = "ایمیل وارد شده معتبر نمی‌باشد.")]
         public string Email { get; set; }
 
         [DisplayName("رمز عبور")]
@@ -48,5 +49,29 @@ namespace Data
 
         [DisplayName("مرا به خاطر بسپار")]
         public bool RememberMe { get; set; }
+    }
+
+    public class ForgotPasswordViewModel
+    {
+        [DisplayName("ایمیل")]
+        [MaxLength(50)]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [EmailAddress(ErrorMessage = "ایمیل وارد شده معتبر نمی‌باشد.")]
+        public string Email { get; set; }
+    }
+
+    public class RecoveryPasswordViewModel
+    {
+        [DisplayName("رمز عبور جدید")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+
+        [DisplayName("تأیید رمز عبور جدید")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "رمزهای عبور یکسان نیست.")]
+        public string PasswordConfirmation { get; set; }
     }
 }

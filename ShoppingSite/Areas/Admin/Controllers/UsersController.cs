@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Data;
 using Data.Context;
 using Domain;
 
 namespace ShoppingSite.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class UsersController : Controller
     {
-        private ShopSiteDB db = new ShopSiteDB();
-
+        UnitOfWork db = new UnitOfWork(new ShopSiteDB());
         // GET: Admin/Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Roles);
-            return View(users.ToList());
+            return View(db.UsersRepository.GetAll());
         }
 
         // GET: Admin/Users/Details/5
@@ -29,7 +30,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Users users = db.Users.Find(id);
+            Users users = db.UsersRepository.GetById(id);
             if (users == null)
             {
                 return HttpNotFound();
@@ -40,7 +41,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
         // GET: Admin/Users/Create
         public ActionResult Create()
         {
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName");
+            ViewBag.RoleId = new SelectList(db.RolesRepository.GetAll(), "RoleId", "RoleName");
             return View();
         }
 
@@ -53,12 +54,12 @@ namespace ShoppingSite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(users);
-                db.SaveChanges();
+                db.UsersRepository.Insert(users);
+                db.Save();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", users.RoleId);
+            ViewBag.RoleId = new SelectList(db.RolesRepository.GetAll(), "RoleId", "RoleName", users.RoleId);
             return View(users);
         }
 
@@ -69,12 +70,12 @@ namespace ShoppingSite.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Users users = db.Users.Find(id);
+            Users users = db.UsersRepository.GetById(id);
             if (users == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", users.RoleId);
+            ViewBag.RoleId = new SelectList(db.RolesRepository.GetAll(), "RoleId", "RoleName", users.RoleId);
             return View(users);
         }
 
@@ -87,11 +88,11 @@ namespace ShoppingSite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(users).State = EntityState.Modified;
-                db.SaveChanges();
+                db.UsersRepository.Update(users);
+                db.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", users.RoleId);
+            ViewBag.RoleId = new SelectList(db.RolesRepository.GetAll(), "RoleId", "RoleName", users.RoleId);
             return View(users);
         }
 
@@ -102,7 +103,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Users users = db.Users.Find(id);
+            Users users = db.UsersRepository.GetById(id);
             if (users == null)
             {
                 return HttpNotFound();
@@ -110,15 +111,22 @@ namespace ShoppingSite.Areas.Admin.Controllers
             return View(users);
         }
 
+        
         // POST: Admin/Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Users users = db.Users.Find(id);
-            db.Users.Remove(users);
-            db.SaveChanges();
+            Users users = db.UsersRepository.GetById(id);
+            db.UsersRepository.Delete(users);
+            db.Save();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult AdminUserName()
+        {
+            ViewBag.username = db.AccountRepository.GetUserNameByEmail(User.Identity.Name);
+            return PartialView();
         }
 
         protected override void Dispose(bool disposing)
