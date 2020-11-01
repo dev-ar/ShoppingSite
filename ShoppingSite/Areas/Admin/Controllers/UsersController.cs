@@ -14,10 +14,12 @@ using Domain;
 namespace ShoppingSite.Areas.Admin.Controllers
 {
     [Authorize(Roles = "admin")]
+    [RouteArea("Admin",AreaPrefix = "admin")]
     public class UsersController : Controller
     {
         UnitOfWork db = new UnitOfWork(new ShopSiteDB());
         // GET: Admin/Users
+        [Route("Users")]
         public ActionResult Index()
         {
             return View(db.UsersRepository.GetAll());
@@ -123,6 +125,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("AdminUserName")]
         public ActionResult AdminUserName()
         {
             ViewBag.username = db.AccountRepository.GetUserNameByEmail(User.Identity.Name);

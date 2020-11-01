@@ -97,7 +97,7 @@
     <div class="container margin-top-25">
         <aside class="col-md-3 col-sm-4 right-side-content" >
             <section class="border-radius category-side">
-                <header style="font-size: 36px"> <i class="fa fa-user-circle-o"></i>احمد</header>
+                <header style="font-size: 20px"> <i class="fa fa-user-circle-o"></i><span style="margin-right: 10px">@Html.Action("GetUserName", "UserAccount")</span></header>
                 <article>
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -116,7 +116,17 @@
                     </ul>
                     <ul class="list-group">
                         <li class="list-group-item">
+                            <h2><i class="fa fa-comment"></i><a style="margin-right: 5px" href=""> نظرات</a> </h2>
+                        </li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item">
                             <h2><i class="fa fa-lock"></i><a style="margin-right: 5px" href="/User/ChangePassword">تغییر رمز عبور </a> </h2>
+                        </li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <h2><i class="fa fa-sign-out"></i><a style="margin-right: 5px" href="/LogOff">خروج </a> </h2>
                         </li>
                     </ul>
                 </article>

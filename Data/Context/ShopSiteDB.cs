@@ -24,5 +24,6 @@ namespace Data.Context
         public SelectedProductGroup SelectedProductGroup { get; set; }
         public DbSet<SiteVisit> SiteVisits { get; set; }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Addresses> Addresses { get; set; }
     }
 }

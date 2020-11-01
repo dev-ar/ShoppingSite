@@ -1093,6 +1093,7 @@
     <Content Include="Areas\User\Views\Shared\_UserLayout.cshtml" />
     <Content Include="Areas\User\Views\UserAccount\UserInfo.cshtml" />
     <Content Include="Areas\User\Views\UserAccount\GetUserName.cshtml" />
+    <Content Include="Areas\User\Views\UserAccount\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1170,6 +1171,10 @@
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{afd06415-1372-44bf-869a-1799f940c7f6}</Project>
       <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{4c27f555-52db-455e-82d3-64afd46b20a6}</Project>
+      <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

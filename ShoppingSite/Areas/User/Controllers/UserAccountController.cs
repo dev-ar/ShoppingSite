@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using Data;
 using Data.Context;
+using Domain;
 using Utilities;
+using ViewModel;
 
 namespace ShoppingSite.Areas.User.Controllers
 {
-    [Authorize(Roles = "user")]
+    [Authorize]
     [RouteArea("User", AreaPrefix = "User")]
     public class UserAccountController : Controller
     {
@@ -21,11 +23,30 @@ namespace ShoppingSite.Areas.User.Controllers
             return View(db.AccountRepository.GetUserByEmail(User.Identity.Name));
         }
 
+        [Route("GetUserName")]
+        [ChildActionOnly]
         public ActionResult GetUserName()
         {
             ViewBag.Username = db.AccountRepository.GetUserNameByEmail(User.Identity.Name);
             return PartialView();
         }
+
+        [Route("Edit")]
+        public ActionResult Edit()
+        {
+            var user = db.AccountRepository.GetUserByEmail(User.Identity.Name);
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("Edit")]
+        public ActionResult Edit(Users model)
+        {
+
+            return View();
+        }
+
 
         [Route("ChangePassword")]
         public ActionResult ChangePassword()

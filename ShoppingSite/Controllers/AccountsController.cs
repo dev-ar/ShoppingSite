@@ -11,6 +11,7 @@ using Data;
 using Domain;
 using Data.Context;
 using Utilities;
+using ViewModel;
 
 namespace ShoppingSite.Controllers
 {
@@ -87,6 +88,10 @@ namespace ShoppingSite.Controllers
                 if (db.AccountRepository.LoginCheck(login.Email, login.Password))
                 {
                     FormsAuthentication.SetAuthCookie(login.Email.Trim().ToLower(), login.RememberMe);
+                    var user = db.AccountRepository.GetUserByEmail(login.Email.Trim().ToLower());
+                    user.LastLoginDate = DateTime.Now;
+                    user.LastLoginIp = AccountsUtilities.GetUserIp();
+                    db.Save();
                     return Redirect(ReturnUrl);
                 }
             }

@@ -17,6 +17,9 @@ namespace Domain
         public int UserId { get; set; }
 
         [Required]
+        public int AddressId { get; set; }
+
+        [Required]
         [DisplayName("تاریخ سفارش")]
         public DateTime OrderDate { get; set; }
 
@@ -28,6 +31,7 @@ namespace Domain
             OrderDetails = new HashSet<OrderDetails>();
         }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
-        public virtual Users Users { get; set; }    
+        public virtual Users Users { get; set; }
+        public virtual Addresses Addresses { get; set; }
     }
 }

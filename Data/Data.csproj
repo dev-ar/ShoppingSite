@@ -70,6 +70,14 @@
     <Compile Include="Migrations\202010141812266_Correcting-Words.designer.cs">
       <DependentUpon>202010141812266_Correcting-Words.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011010023300_Adding-Adress.cs" />
+    <Compile Include="Migrations\202011010023300_Adding-Adress.designer.cs">
+      <DependentUpon>202011010023300_Adding-Adress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011011116453_adding-address-to-Orders.cs" />
+    <Compile Include="Migrations\202011011116453_adding-address-to-Orders.designer.cs">
+      <DependentUpon>202011011116453_adding-address-to-Orders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
@@ -78,7 +86,6 @@
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
-    <Compile Include="ViewModels\AccountViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -104,8 +111,16 @@
     <EmbeddedResource Include="Migrations\202010141812266_Correcting-Words.resx">
       <DependentUpon>202010141812266_Correcting-Words.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011010023300_Adding-Adress.resx">
+      <DependentUpon>202011010023300_Adding-Adress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011011116453_adding-address-to-Orders.resx">
+      <DependentUpon>202011011116453_adding-address-to-Orders.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

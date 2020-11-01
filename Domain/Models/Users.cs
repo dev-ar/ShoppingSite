@@ -54,8 +54,10 @@ namespace Domain
         public Users()
         {
             this.Orders = new HashSet<Orders>();
+            this.Addresses = new HashSet<Addresses>();
         }
 
+        public virtual ICollection<Addresses> Addresses  { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
         public virtual Roles Roles { get; set; }    
     }
