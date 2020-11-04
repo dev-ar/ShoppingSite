@@ -17,7 +17,7 @@ namespace Domain
         public int RoleId { get; set; }
 
         [MaxLength(200)]
-        [DisplayName("نام کاربری")]
+        [DisplayName("نام و نام خانوادگی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public string UserName { get; set; }
 
@@ -37,6 +37,7 @@ namespace Domain
         public string ActiveCode { get; set; }
 
         [Required]
+        [DisplayName("فعال")]
         public bool IsActive { get; set; }
 
         [DisplayName("تاریخ ثبت‌نام")]
@@ -48,6 +49,7 @@ namespace Domain
         public string LastLoginIp { get; set; }
 
         [Required]
+        [DisplayName("تاریخ آخرین بازدید")]
         public DateTime LastLoginDate { get; set; }
 
 

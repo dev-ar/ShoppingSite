@@ -7,13 +7,13 @@ namespace Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class CorrectingWords : IMigrationMetadata
+    public sealed partial class fixing : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CorrectingWords));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fixing));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010141812266_Correcting-Words"; }
+            get { return "202011031832502_fixing"; }
         }
         
         string IMigrationMetadata.Source

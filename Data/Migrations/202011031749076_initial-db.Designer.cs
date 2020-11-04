@@ -7,13 +7,13 @@ namespace Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class addingIPActive : IMigrationMetadata
+    public sealed partial class initialdb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addingIPActive));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initialdb));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010141803087_adding-IP-Active"; }
+            get { return "202011031749076_initial-db"; }
         }
         
         string IMigrationMetadata.Source

@@ -15,7 +15,7 @@ namespace Domain
         public int RoleId { get; set; }
 
         [MaxLength(200)]
-        [DisplayName("نام لاتین نقش")]
+        [DisplayName("نقش کاربر")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public string RoleName { get; set; }
         

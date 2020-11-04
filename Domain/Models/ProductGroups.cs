@@ -19,6 +19,7 @@ namespace Domain
         public string GroupTitle { get; set; }
         public int? ParentId { get; set; }
 
+
         public ProductGroups()
         {
             ProductGroups1 = new HashSet<ProductGroups>();

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Domain.Users>
+﻿@using Utilities
+@model IEnumerable<Domain.Users>
 
 @{
     ViewBag.Title = "Index";
@@ -54,11 +55,11 @@
             @Html.DisplayFor(modelItem => item.IsActive)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RegisterDate)
+            @item.RegisterDate.ToShamsi()
         </td>
    
         <td>
-            @Html.DisplayFor(modelItem => item.LastLoginDate)
+            @item.LastLoginDate.ToShamsi()
         </td>
         <td>
             <a class=" btn btn-warning" href="Users/Edit/@item.UserId">

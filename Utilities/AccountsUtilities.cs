@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,6 +13,12 @@ namespace Utilities
 {
     public static class AccountsUtilities
     {
+        public static string ToShamsi(this DateTime value)
+        {
+            PersianCalendar pc = new PersianCalendar();
+
+            return pc.GetYear(value) + "/" + pc.GetMonth(value).ToString("00") + "/" + pc.GetDayOfMonth(value).ToString("00");
+        }
         public static string HashPassword(this string password)
         {
             byte[] salt;
