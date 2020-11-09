@@ -14,5 +14,8 @@ namespace Data
         bool LoginCheck(string email, string password);
         string GetUserNameByEmail(string email);
         Users GetUserByEmail(string email);
+        IEnumerable<Addresses> GetAddressByEmail(string email);
+        string GetStateById(int id);
+        IEnumerable<Cities> GetCitiesByStateId(int id);
     }
 }

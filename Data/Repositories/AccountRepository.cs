@@ -44,5 +44,21 @@ namespace Data
         {
              return db.Users.SingleOrDefault(u => u.Email == email.Trim().ToLower());
         }
+
+        public IEnumerable<Addresses> GetAddressByEmail(string email)
+        {
+            var user = db.Users.Single(u => u.Email == email.Trim().ToLower());
+            return db.Addresses.Where(a => a.UserId == user.UserId);
+        }
+
+        public string GetStateById(int id)
+        {
+            return db.States.Single(s => s.StateId == id).StateTitle;
+        }
+
+        public IEnumerable<Cities> GetCitiesByStateId(int id)
+        {
+            return db.Cities.Where(s => s.StateId == id);
+        }
     }
 }

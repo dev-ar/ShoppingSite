@@ -66,6 +66,18 @@
     <Compile Include="Migrations\202011031832502_fixing.designer.cs">
       <DependentUpon>202011031832502_fixing.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011041621365_Cities.cs" />
+    <Compile Include="Migrations\202011041621365_Cities.designer.cs">
+      <DependentUpon>202011041621365_Cities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011042135471_add-states-cities.cs" />
+    <Compile Include="Migrations\202011042135471_add-states-cities.designer.cs">
+      <DependentUpon>202011042135471_add-states-cities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011050032368_Fixing-State-Cities.cs" />
+    <Compile Include="Migrations\202011050032368_Fixing-State-Cities.designer.cs">
+      <DependentUpon>202011050032368_Fixing-State-Cities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
@@ -98,6 +110,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011031832502_fixing.resx">
       <DependentUpon>202011031832502_fixing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011041621365_Cities.resx">
+      <DependentUpon>202011041621365_Cities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011042135471_add-states-cities.resx">
+      <DependentUpon>202011042135471_add-states-cities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011050032368_Fixing-State-Cities.resx">
+      <DependentUpon>202011050032368_Fixing-State-Cities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

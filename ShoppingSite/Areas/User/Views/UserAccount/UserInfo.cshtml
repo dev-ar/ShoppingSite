@@ -1,38 +1,67 @@
 ﻿@model Domain.Users
-@{
-    ViewBag.Title = "UserInfo";
-}
+@{ ViewBag.Title = "UserInfo"; }
 
 
 <div class="col-md-9 col-sm-8 left-side-content internal-style">
-    <span style="font-size: 20px">اطلاعات کاربری</span>
-    <hr />
-    <article>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">نام و نام خانوادگی</div>
-                <div class="panel-body">
-                     @Model.UserName
+    <header><span style="font-size: 20px">اطلاعات کاربری</span></header>
+    <hr/>
+            <article>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">نام و نام خانوادگی</div>
+                        <div class="panel-body">
+                            @Model.UserName
+                            <a class=" pull-left" href=""><i class="fa fa-edit"></i></a>
+                            
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">ایمیل</div>
+                        <div class="panel-body">
+                            @Model.Email
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">ایمیل</div>
-                <div class="panel-body">
-                    @Model.Email
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">شماره تلفن همراه</div>
-                <div class="panel-body">
-                    09012723589
-                </div>
-            </div>
-            <a class="btn btn-primary" href="/user/edit">ویرایش اطلاعات کاربری</a>
-        </div>
-        <div class="clearfix"></div>
-    </article>
+                <div class="clearfix"></div>
+            </article>
+    </div>
 
-</div>
+@*<div class="col-md-9 col-sm-8 left-side-content internal-style" id="FaFont">
+    <section class="border-radius">
+        <header><h3 style="font-size: 20px">نشانی‌ها </h3></header>
+        <article>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <ul>
+                    <li>
+                        <p style="font-size: 18px;">
+                            
+                            نام و نام خانوادگی: @Model.UserName
+                        </p>
+
+                    </li>
+                    <hr />
+                    <li>
+                        <p style="font-size: 18px;">
+                            <i class="fa fa-envelope" style="margin-left: 10px"></i>
+                            پست الکترونیک: @Model.Email
+
+                        </p>
+                        <br/>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </article>
+    </section>
+</div>*@
+
+
+
+
+
+
+
 
 @*<div class="col-md-9 col-sm-8 left-side-content internal-style">
 

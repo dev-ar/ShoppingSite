@@ -40,7 +40,7 @@ namespace ShoppingSite.Controllers
             {
                 if (db.AccountRepository.ExistCheck(register.Email))
                 {
-                    var user = new Users()
+                    var user = new Users
                     {
                         UserName = register.UserName.Trim(),
                         Email = register.Email.Trim().ToLower(),

@@ -77,6 +77,62 @@ namespace ShoppingSite.Areas.User.Controllers
             ViewBag.IsSuccess = true;
             return View();
         }
-       
+
+        [Route("Address")]
+        public ActionResult ShowAddresses()
+        {
+            return View(db.AccountRepository.GetAddressByEmail(User.Identity.Name));
+        }
+
+
+        [Route("AddAddress")]
+        public ActionResult AddAddress()
+        {
+            ViewBag.State = new SelectList(db.StateRepository.GetAll(), "StateId", "StateTitle");
+            return View();
+        }
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("AddAddress")]
+        public ActionResult AddAddress([Bind(Include = "State,Cities,ReceiverName,PhoneNumber,Address,PlateNumber,ZipCode,IdentificationCode")] AddAddressViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.AccountRepository.GetUserByEmail(User.Identity.Name);
+                var state = db.AccountRepository.GetStateById(Convert.ToInt32(model.State));
+                var address = new Addresses
+                {
+                    UserId = user.UserId,
+                    City = state +"، " + model.Cities,
+                    ReceiverName = model.ReceiverName,
+                    PhoneNumber = model.PhoneNumber,
+                    Address = model.Address,
+                    PlateNumber = model.PlateNumber,
+                    ZipCode = model.ZipCode,
+                    IdentificationCode = model.IdentificationCode,
+                };
+                db.AddressesRepository.Insert(address);
+                db.Save();
+                return Redirect("/user/address?added=true");
+            }
+
+            ViewBag.State = new SelectList(db.StateRepository.GetAll(), "StateId", "StateTitle");
+            return View(model);
+        }
+
+
+        [Route("GetCities/{id}")]
+        public ActionResult GetCities(int id)
+        {
+            var data = db.AccountRepository.GetCitiesByStateId(id)
+                .Select(c => new {Text = c.CityTitle, Value = c.CityTitle});
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

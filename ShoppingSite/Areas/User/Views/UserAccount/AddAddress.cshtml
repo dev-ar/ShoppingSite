@@ -1,0 +1,221 @@
+﻿@using System.Web.UI.WebControls
+@using Domain
+@model ViewModel.AddAddressViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<style>
+   .dropdown-ad
+   {
+       font-family: 'Vazir';
+   }
+    .address-forms {
+        width: 100% !important;
+    }
+</style>
+
+
+
+
+
+<div class="col-md-9 col-sm-8 left-side-content internal-style">
+
+    <section class="border-radius">
+        <header><h3> افزودن نشانی جدید </h3></header>
+        <article>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-6 float-right">
+                                @*@Html.DropDownListFor(m => m.MainCityId,(SelectList)ViewBag.State,"استان", htmlAttributes: new { @class = "form-control", id = "ts" }) )*@
+                                @Html.DropDownList("State", (SelectList)ViewBag.State, "استان", htmlAttributes: new { @class = "form-control dropdown-ad", id = "state" })
+                                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6 float-left">
+                                <select class="form-control dropdown-ad" id="city" name="Cities">
+                                    <option selected="selected" disabled="disabled">شهر</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.Cities, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control address-forms", PlaceHolder = "نشانی پستی" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                               
+                            </div>
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.PlateNumber, new { htmlAttributes = new { @class = "form-control address-forms", PlaceHolder = "پلاک" } })
+                                @Html.ValidationMessageFor(model => model.PlateNumber, "", new { @class = "text-danger" })
+                               
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control address-forms", PlaceHolder = "کد پستی" } })
+                                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                                
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ReceiverName, new {htmlAttributes = new {@class = "form-control address-forms", PlaceHolder = "نام و نام خانوادگی گیرنده"}})
+                                @Html.ValidationMessageFor(model => model.ReceiverName, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.IdentificationCode, new { htmlAttributes = new { @class = "form-control address-forms", PlaceHolder = "کد ملی گیرنده" } })
+                                @Html.ValidationMessageFor(model => model.IdentificationCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.PhoneNumber, new {htmlAttributes = new {@class = "form-control address-forms", PlaceHolder = "شماره موبایل گیرنده"}})
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class=" col-md-12">
+                                <input type="submit" value="ثبت نشانی" class="btn btn-default address-forms" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="clearfix"></div>
+        </article>
+    </section>
+
+</div>
+
+@section scripts
+{
+    <script>
+        $("#state").change(function () {
+            var loading = $('<option></option>').text("شهر");
+            $('#city').attr("disabled", "disabled").empty().append(loading);
+
+            $.getJSON("/user/GetCities/" + $("#state > option:selected").attr("value"),
+                function (result) {
+                    $("#city").removeAttr("disabled").empty().append($("<option>").val("").text("انتخاب کنید"));
+
+                    $.each(result,
+                        function (index, item) {
+                            $("#city").append($("<option></option>").val(item.Value).text(item.Text));
+                        });
+                });
+
+        });
+    </script>
+}
+
+
+
+
+
+
+@*<h2>Create</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Addresses</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownList("States", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ReceiverName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ReceiverName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PlateNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PlateNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PlateNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdentificationCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IdentificationCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IdentificationCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }*@

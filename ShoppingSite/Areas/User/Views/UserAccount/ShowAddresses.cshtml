@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Domain.Addresses>
+@{
+    ViewBag.Title = "ShowAddresses";
+}
+
+
+
+
+
+@*<section class="last-news-section border-radius margin-top-60">
+        <header><i class="icons icon-doc-2"></i>  <h3>آخرین آخبار ارسالی</h3> </header>
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <img class="border-radius" src="/PageImages/@item.ImageName">
+                    <h2> <a href="/News/@item.PageID"> @item.Title </a></h2>
+                    <p>
+                        @item.ShortDescription
+                    </p>
+                    <span class="date-publish"><i class="fa fa-calendar"></i> انتشار : @item.CreateDate.ToShmasi() </span>
+                    <a href="/News/@item.PageID" class="more-link"><i class="icons icon-more"></i></a>
+                </li>
+            }
+
+        </ul>
+    </section>*@
+@if (Request.QueryString["added"] != null)
+{
+    <div class="col-md-9 col-sm-8 left-side-content internal-style">
+        <div class="alert alert-success">
+            <p>نشانی جدید با موفقیت اضافه شد.</p>
+        </div>
+    </div>
+}
+
+
+<div class="col-md-9 col-sm-8 left-side-content internal-style" id="FaFont">
+    <section class="border-radius">
+        <header><h3 style="font-size: 20px">نشانی‌ها </h3></header>
+        <article>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <p style="font-size: 18px;">  @item.Address پلاک @item.PlateNumber</p>
+                            <p>
+                                <i class="fa fa-address-card"></i><span style="margin-right: 5px; margin-top: 10px"> @item.City </span> <br />
+                                <i class="fa fa-envelope"></i><span style="margin-right: 5px; margin-top: 10px"> @item.ZipCode </span>  <br />
+                                <i class="fa fa-phone"></i><span style="margin-right: 5px; margin-top: 10px"> @item.PhoneNumber </span> <br />
+                                <i class="fa fa-user"></i><span style="margin-right: 5px; margin-top: 10px"> @item.ReceiverName </span>
+                            </p>
+
+                            <a class="btn btn-info" href=""><i class="fa fa-edit"></i></a>
+                            <a href="" class=" btn btn-danger "><i class="fa fa-trash"></i></a>
+                        </li>
+                        <hr />
+                    }
+
+                </ul>
+                <a style="margin-bottom: 15px; width: 100%" class="btn btn-primary" href="/user/addaddress">افزودن آدرس جدید</a>
+            </div>
+            <div class="clearfix"></div>
+        </article>
+    </section>
+</div>
+
+
+@*<div class="col-md-9 col-sm-8 left-side-content internal-style">
+        <span style="font-size: 20px">اطلاعات کاربری</span>
+        <hr />
+        <article>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">نام و نام خانوادگی</div>
+                    <div class="panel-body">
+                        <ul class="">
+                            @foreach (var item in Model)
+                            {
+                                <li class="">
+                                    <h2>  @item.Address <</h2>
+                                    <p>
+                                        @item.Users.UserName <br />
+                                        @item.PhoneNumber <br />
+                                        @item.ZipCode
+                                    </p>
+                                    <span class="" style="  font-size: 14px;color: #a5a5a5;position: absolute;top: 20px;left:20px;"><i class="fa fa-trash"></i></span>
+                                    <a href="" style="position: absolute;left: 20px;bottom: 15px"><i class="fa fa-edit"></i></a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+               <a class="btn btn-primary" href="/user/edit">ویرایش اطلاعات کاربری</a>
+            </div>
+            <div class="clearfix"></div>
+        </article>
+
+    </div>*@
+

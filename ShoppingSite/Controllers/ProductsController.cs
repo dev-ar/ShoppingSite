@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Data.Context;
+
+namespace ShoppingSite.Controllers
+{
+    public class ProductsController : Controller
+    {
+        // GET: Products
+        ShopSiteDB db = new ShopSiteDB();
+        public ActionResult ShowGroups()
+        {
+            return PartialView(db.ProductGroups.ToList());
+        }
+    }
+}

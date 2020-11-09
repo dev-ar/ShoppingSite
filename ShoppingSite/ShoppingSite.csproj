@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\jquery-3.5.1.min.js" />
     <Content Include="Areas\Admin\Content\alter\dist\css\adminlte.css" />
     <Content Include="Areas\Admin\Content\alter\dist\css\adminlte.min.css" />
     <Content Include="Areas\Admin\Content\alter\dist\css\bootstrap-rtl.min.css" />
@@ -1094,6 +1095,12 @@
     <Content Include="Areas\User\Views\UserAccount\UserInfo.cshtml" />
     <Content Include="Areas\User\Views\UserAccount\GetUserName.cshtml" />
     <Content Include="Areas\User\Views\UserAccount\Edit.cshtml" />
+    <Content Include="Areas\User\Views\UserAccount\AddAddress.cshtml" />
+    <Content Include="Areas\User\Views\Addresses\Delete.cshtml" />
+    <Content Include="Areas\User\Views\Addresses\Details.cshtml" />
+    <Content Include="Areas\User\Views\Addresses\Edit.cshtml" />
+    <Content Include="Areas\User\Views\Addresses\Index.cshtml" />
+    <Content Include="Areas\User\Views\UserAccount\ShowAddresses.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1113,11 +1120,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\User\Controllers\AddressesController.cs" />
     <Compile Include="Areas\User\Controllers\UserAccountController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageEmailsController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\tstController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1146,6 +1155,7 @@
     <Content Include="Views\Accounts\ForgotPassword.cshtml" />
     <Content Include="Views\ManageEmails\RecoveryPassword.cshtml" />
     <Content Include="Views\Accounts\RecoveryPassword.cshtml" />
+    <Content Include="Views\Products\ShowGroups.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

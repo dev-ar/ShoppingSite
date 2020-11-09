@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Addresses.cs" />
+    <Compile Include="Models\Cities.cs" />
     <Compile Include="Models\Features.cs" />
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\Orders.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Models\SelectedProductGroup.cs" />
     <Compile Include="Models\SiteVisit.cs" />
     <Compile Include="Models\Slider.cs" />
+    <Compile Include="Models\States.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

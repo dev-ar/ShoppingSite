@@ -41,5 +41,7 @@ namespace Data.Context
         public DbSet<SiteVisit> SiteVisits { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Addresses> Addresses { get; set; }
+        public DbSet<States> States { get; set; }
+        public DbSet<Cities> Cities { get; set; }
     }
 }

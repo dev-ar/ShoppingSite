@@ -66,7 +66,7 @@ namespace ViewModel
         [DisplayName("رمز عبور جدید")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "رمز عبور شما باید بین ۸ تا ۲۰ کاراکتر باشد.")]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "رمز عبور شما باید بین ۶ تا ۲۰ کاراکتر باشد.")]
         public string Password { get; set; }
 
 
@@ -82,14 +82,14 @@ namespace ViewModel
         [DisplayName("رمز عبور فعلی")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "رمز عبور شما باید بین ۸ تا ۲۰ کاراکتر باشد.")]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "رمز عبور شما باید بین ۶ تا ۲۰ کاراکتر باشد.")]
         public string OldPassword { get; set; }
 
 
         [DisplayName("رمز عبور جدید")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "رمز عبور شما باید بین ۸ تا ۲۰ کاراکتر باشد.")]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "رمز عبور شما باید بین ۶ تا ۲۰ کاراکتر باشد.")]
         public string Password { get; set; }
 
         [DisplayName("تأیید رمز عبور جدید")]
@@ -98,4 +98,5 @@ namespace ViewModel
         [Compare("Password", ErrorMessage = "رمزهای عبور یکسان نیست.")]
         public string PasswordConfirmation { get; set; }
     }
+
 }

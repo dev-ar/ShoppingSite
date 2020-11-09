@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Domain.ProductGroups>
+<aside class="col-md-3 col-sm-4 right-side-content">
+
+    <section class="border-radius category-side">
+        <header><h3> دسته بندی ها </h3></header>
+        <article>
+            <ul class="category-menu">
+                @foreach (var item in Model.Where(g => g.ParentId == null))
+                {
+                    <li>
+                        <h2><a href="">@item.GroupTitle</a></h2>
+                        <ul class="child-category-menu">
+                            @foreach (var subItem in Model.Where(g => g.ParentId == item.GroupId))
+                            {
+                                <li>
+                                    <h2><a href=""> @subItem.GroupTitle </a></h2>
+                                </li>
+                            }
+                         
+
+                        </ul>
+                    </li>
+                }
+
+
+            </ul>
+        </article>
+    </section>
+</aside>

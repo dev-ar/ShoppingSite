@@ -44,6 +44,16 @@ namespace Data
         public GenericRepository<SiteVisit> SiteVisitRepository { get; }
         public GenericRepository<Slider> SliderRepository { get; }
 
+        private GenericRepository<Addresses> _addressesRepository;
+        public GenericRepository<Addresses> AddressesRepository => _addressesRepository ??= new GenericRepository<Addresses>(db);
+
+
+        private GenericRepository<States> _stateRepository;
+        public GenericRepository<States> StateRepository => _stateRepository ??= new GenericRepository<States>(db);
+
+        private GenericRepository<Cities> _citiesRepository;
+        public GenericRepository<Cities> CitiesRepository => _citiesRepository ??= new GenericRepository<Cities>(db);
+
         private AccountRepository _accountRepository;
         public AccountRepository AccountRepository => _accountRepository ??= new AccountRepository(db); 
 
