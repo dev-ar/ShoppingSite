@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountViewModel.cs" />
+    <Compile Include="AdminPanel\ProductGroupsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserPanel\AddAddressViewModel.cs" />
     <Compile Include="UserPanel\UserEditViewModel.cs" />

@@ -60,5 +60,15 @@ namespace Data
         {
             return db.Cities.Where(s => s.StateId == id);
         }
+
+        public IEnumerable<ProductGroups> GetMainProductGroups()
+        {
+            return db.ProductGroups.Where(g => g.ParentId == null);
+        }
+
+        public IEnumerable<ProductGroups> GetAllSubGroups(int groupId)
+        {
+            return db.ProductGroups.Where(g => g.ParentId == groupId);
+        }
     }
 }

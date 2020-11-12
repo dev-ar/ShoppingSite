@@ -17,7 +17,7 @@ namespace Data
         GenericRepository<Products> ProductsRepository { get; }
         GenericRepository<ProductFeatures> ProductFeaturesRepository { get; }
         GenericRepository<Features> FeaturesRepository { get; }
-        GenericRepository<ProductGroups> ProductGroups { get; }
+        GenericRepository<ProductGroups> ProductGroupsRepository { get; }
         GenericRepository<SelectedProductGroup> SelectedProductGroupRepository  { get; }
         GenericRepository<ProductGalleries> ProductGalleriesRepository { get; }
         GenericRepository<ProductTags> ProductTagsRepository { get; }

@@ -1,0 +1,116 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section PageHeaders
+{
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">مدیریت گروه‌های کالاها </h1>
+    </div><!-- /.col -->
+
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="#">خانه</a></li>
+            <li class="breadcrumb-item active">صفحه سریع</li>
+        </ol>
+    </div><!-- /.col -->
+}
+<style>
+    .CrudIcon {
+        cursor: pointer;
+    }
+</style>
+<p>
+    <a onclick="Create(0)" class="btn btn btn-success">
+        افزودن گروه جدید
+    </a>
+</p>
+<div id="listGroup">
+    @Html.Action("ListGroups")
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">افزودن گروه جدید</h5>
+                <div class="pull-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="modalBody">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+@section Scripts
+ {
+    <script>
+        function Create(id) {
+            $.get("/admin/AddPG/" + id,
+                function (result) {
+                    $("#modal").modal();
+                    $("#modalTitle").html("افزودن گروه جدید");
+                    $("#modalBody").html(result);
+                });
+        }
+        function Edit(id) {
+            $.get("/admin/EditPG/" + id,
+                function (result) {
+                    $("#modal").modal();
+                    $("#modalTitle").html("ویرایش گروه");
+                    $("#modalBody").html(result);
+                });
+        }
+
+        function Delete(id) {
+            $.get("/admin/DeletePG/" + id,
+                function (result) {
+                    $("#modal").modal();
+                    $("#modalTitle").html("حذف گروه");
+                    $("#modalBody").html(result);
+                });
+        }
+
+        function success() {
+            $("#modal").modal('hide');
+        }
+        //$('#btnSubmit').click(function (event) {
+        //    event.preventDefault();
+        //    event.stopImmediatePropagation();
+        //    $('#form').submit();
+
+        //    $.ajax({
+        //        url: "/admin/ListGroups",
+        //        dataType: 'html',
+        //        success: function(data) {
+        //            $('#listGroup').html(data);
+        //            $("#modal").modal('hide');
+        //        }
+        //    });
+        //});
+        @*function addComment() {
+            $.ajax({
+                url: "/News/AddComment/" + @Model.PageID,
+                Type: "Get",
+                data: {
+                    name: $("#txtName").val(),
+                    email: $("#txtEmail").val(),
+                    comment: $("#txtComment").val()
+                }
+            }).done(function (result) {
+                $("#CommentList").html(result);
+                $("#txtName").val(""),
+                    $("#txtEmail").val(""),
+                    $("#txtComment").val("");
+            });
+        }*@
+    </script>
+}

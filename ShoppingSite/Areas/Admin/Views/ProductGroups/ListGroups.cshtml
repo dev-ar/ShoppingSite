@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Domain.ProductGroups>
+<table class="table table-striped">
+    <tr>
+        <th>
+            گروه‌ها
+        </th>
+        <th>
+            زیر گروه‌ها
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.Where(g => g.ParentId == null))
+    {
+        <tr>
+            <td>
+                <ul class="list-group">
+                    <li class="list-group-item" style="font-size:30px">
+                        @item.GroupTitle
+                        <div class="pull-left CrudIcon">
+                            <i style="color: dodgerblue" class="fa fa-plus" onclick="Create(@item.GroupId)"></i>
+                            <i style="color: orange" class="fa fa-edit" onclick="Edit(@item.GroupId)"></i>
+                            <i style="color: red" class="fa fa-remove" onclick="Delete(@item.GroupId)"></i>
+                        </div>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <ul class="list-group list-group-flush">
+                    @foreach (var subGroups in Model.Where(g => g.ParentId == item.GroupId))
+                    {
+                        <div style="margin-bottom: 20px">
+                            <li class="list-group-item" style="font-size: 25px">
+                                @subGroups.GroupTitle
+
+                                <div class="pull-left CrudIcon">
+                                    <i style="color:dodgerblue" class="fa fa-plus" onclick="Create(@subGroups.GroupId)"></i>
+                                    <i style="color: orange" class="fa fa-edit" onclick="Edit(@subGroups.GroupId)"></i>
+                                    <i style="color: red" class="fa fa-remove " onclick="Delete(@subGroups.GroupId)"></i>
+                                </div>
+
+                            </li>
+
+                            @foreach (var thirdSub in Model.Where(g => g.ParentId == subGroups.GroupId))
+                            {
+                                <li class="list-group-item" style="font-size: 15px">
+                                    @thirdSub.GroupTitle
+                                    <div class="pull-left CrudIcon">
+
+                                        <i style="color: orange" class="fa fa-edit" onclick="Edit(@thirdSub.GroupId)"></i>
+                                        <i style="color: red" class="fa fa-remove" onclick="Delete(@thirdSub.GroupId)"></i>
+                                    </div>
+                                </li>
+
+                            }
+                        </div>
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+
+</table>
+ @section Scripts
+ {
+     
+ }

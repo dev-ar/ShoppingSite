@@ -34,7 +34,13 @@ namespace Domain
 
         [Required]
         [DisplayName("تصویر")]
+        [MaxLength(50)]
         public string ImageName { get; set; }
+
+        [Range(1,5)]
+        [DisplayName("امتیاز محصول")]
+        [Required]
+        public decimal ProductRate { get; set; }    
 
         [DisplayName("تاریخ ثبت")]
         [DisplayFormat(DataFormatString = "{0: yyyy/MM/dd}")]

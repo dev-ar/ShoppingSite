@@ -23,7 +23,7 @@ namespace Domain
         public ProductGroups()
         {
             ProductGroups1 = new HashSet<ProductGroups>();
-            SelectedProductGroups = new List<SelectedProductGroup>();
+            SelectedProductGroups = new HashSet<SelectedProductGroup>();
         }
         public virtual ICollection<ProductGroups> ProductGroups1 { get; set; }
         public virtual ProductGroups ProductGroups2 { get; set; }

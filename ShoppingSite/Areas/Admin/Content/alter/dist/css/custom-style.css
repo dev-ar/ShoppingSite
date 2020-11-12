@@ -62,8 +62,15 @@
 
 body {
     font-family: 'Vazir', sans-serif !important;
+    
+}
+.modal-open {
+    padding-right: 0 !important;
 }
 
+/*html {
+    overflow-y: scroll !important;
+}*/
 .ltr {
     direction:ltr;
 }

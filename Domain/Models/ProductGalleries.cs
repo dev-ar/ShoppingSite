@@ -24,6 +24,7 @@ namespace Domain
 
         [Required]
         [DisplayName("تصویر")]
+        [MaxLength(50)]
         public string ImageName { get; set; }
 
 

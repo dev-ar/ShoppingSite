@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h5>آیا از حذف گروه "@ViewBag.pgName" مطمئن هستید؟</h5>
+<div>
+    @using (Ajax.BeginForm("Delete","ProductGroups", FormMethod.Post, new AjaxOptions()
+    {
+        OnSuccess = "success",
+        UpdateTargetId = "listGroup"
+    })) 
+    {
+        @Html.AntiForgeryToken()
+        <br/>
+            <input type="submit" value="حذف" class="btn btn-danger" />
+    }
+</div>

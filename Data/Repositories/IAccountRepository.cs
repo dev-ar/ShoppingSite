@@ -17,5 +17,7 @@ namespace Data
         IEnumerable<Addresses> GetAddressByEmail(string email);
         string GetStateById(int id);
         IEnumerable<Cities> GetCitiesByStateId(int id);
+        IEnumerable<ProductGroups> GetMainProductGroups();
+        IEnumerable<ProductGroups> GetAllSubGroups(int groupId);
     }
 }

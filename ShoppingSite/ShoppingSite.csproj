@@ -1101,6 +1101,11 @@
     <Content Include="Areas\User\Views\Addresses\Edit.cshtml" />
     <Content Include="Areas\User\Views\Addresses\Index.cshtml" />
     <Content Include="Areas\User\Views\UserAccount\ShowAddresses.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGroups\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGroups\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGroups\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGroups\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGroups\ListGroups.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1119,6 +1124,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductGroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\User\Controllers\AddressesController.cs" />
     <Compile Include="Areas\User\Controllers\UserAccountController.cs" />

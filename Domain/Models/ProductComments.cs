@@ -11,29 +11,26 @@ namespace Domain
     public class ProductComments
     {
         [Key]
-        public int Commentid { get; set; }
+        public int CommentId { get; set; }
 
         [Required]
         public int ProductId { get; set; }
 
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        [MaxLength(100)]
-        [DisplayName("نام کاربری")]
-        public string Name { get; set; }
+        [Required]
+        public int UserId { get; set; } 
 
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        [DisplayName("ایمیل")]
+        [DisplayName("عنوان نظر")]
         [MaxLength(150)]
-        public string Email { get; set; }
-
-        [DisplayName("سایت")]
-        [MaxLength(150)]
-        public string WebSite { get; set; }
+        public string CommentTitle { get; set; }
 
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(800)]
         [DisplayName("نظر")]
         public string Text { get; set; }
+
+        [Range(1,5)]
+        [DisplayName("امتیاز")]
+        public decimal Rate { get; set; }   
 
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DisplayName("تاریخ ثبت نظر")]
@@ -47,7 +44,8 @@ namespace Domain
 
         public virtual ICollection<ProductComments> ProductComments1 { get; set; }
         public virtual ProductComments ProductComments2 { get; set; }
-        public virtual Products Products { get; set; }  
+        public virtual Products Products { get; set; }
+        public virtual Users Users { get; set; }
 
     }
 }

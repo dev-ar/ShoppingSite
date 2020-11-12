@@ -14,7 +14,7 @@ namespace Data
 
         public UnitOfWork(ShopSiteDB context) => db = context;
 
-        
+
         private GenericRepository<Users> _usersRepository;
         public GenericRepository<Users> UsersRepository => _usersRepository ??= new GenericRepository<Users>(db);
 
@@ -25,7 +25,7 @@ namespace Data
         private GenericRepository<Orders> _ordersRepository;
         public GenericRepository<Orders> OrdersRepository => _ordersRepository ??= new GenericRepository<Orders>(db);
 
-        
+
         private GenericRepository<OrderDetails> _orderDetailsRepository;
         public GenericRepository<OrderDetails> OrderDetailsRepository => _orderDetailsRepository ??= new GenericRepository<OrderDetails>(db);
 
@@ -36,7 +36,14 @@ namespace Data
 
         public GenericRepository<ProductFeatures> ProductFeaturesRepository { get; }
         public GenericRepository<Features> FeaturesRepository { get; }
-        public GenericRepository<ProductGroups> ProductGroups { get; }
+
+
+        private GenericRepository<ProductGroups> _productGroupsRepository;
+
+        public GenericRepository<ProductGroups> ProductGroupsRepository =>
+            _productGroupsRepository ??= new GenericRepository<ProductGroups>(db);
+
+
         public GenericRepository<SelectedProductGroup> SelectedProductGroupRepository { get; }
         public GenericRepository<ProductGalleries> ProductGalleriesRepository { get; }
         public GenericRepository<ProductTags> ProductTagsRepository { get; }
@@ -55,7 +62,7 @@ namespace Data
         public GenericRepository<Cities> CitiesRepository => _citiesRepository ??= new GenericRepository<Cities>(db);
 
         private AccountRepository _accountRepository;
-        public AccountRepository AccountRepository => _accountRepository ??= new AccountRepository(db); 
+        public AccountRepository AccountRepository => _accountRepository ??= new AccountRepository(db);
 
         public void Save()
         {
