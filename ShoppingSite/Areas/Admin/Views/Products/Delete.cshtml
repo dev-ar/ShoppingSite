@@ -1,16 +1,15 @@
-﻿@model Domain.Users
+﻿@model Domain.Products
 
 @{
     ViewBag.Title = "Delete";
 }
 
 
-
-<h5>آیا از حذف کاربر "@Model.UserName" مطمئن هستید؟</h5>
+<h5>آیا از حذف محصول "@Model.ProductTitle" مطمئن هستید؟</h5>
 <div>
-   
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
         <br/>
         <input type="submit" value="حذف" class="btn btn-danger" />

@@ -1,0 +1,128 @@
+﻿@using Domain
+@using Utilities
+@model IEnumerable<Domain.Products>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>محصولات</h2>
+
+<p>
+    <a class="btn btn-success" href="/admin/Products/add">
+        افزودن محصول جدید
+    </a>
+</p>
+
+<style>
+    td {
+        margin-left: 5px
+    }
+</style>
+<table class="table">
+    <tr>
+        <th>
+            تصویر
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img class="img-thumbnail" style="max-width: 150px" src="/Images/ProductImages/@item.ImageName" />
+            </td>
+            <td>
+                @{
+                    var length = 0;
+                    if (item.ProductTitle.Length > 80)
+                    {
+                         length = (item.ProductTitle.Length * 2) / 4 ;
+                    }
+                    else
+                    {
+                        length = item.ProductTitle.Length;
+                    }
+
+
+                }
+                @item.ProductTitle.Substring(0, length)...
+            </td>
+            <td>
+                @item.Price.ToString("#,0 تومان")
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductRate)
+            </td>
+            <td>
+                @item.CreateDate.ToShamsi()
+            </td>
+            <td>
+                <a class="btn btn-default" href="@Url.Action("Gallery", new {id = item.ProductId})">گالری</a>
+                <a class="btn btn-default">ویژگی‌</a>
+
+
+                <a class=" btn btn-warning" href="@Url.Action("Edit", new {id = item.ProductId})">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a class="btn btn-info" href="@Url.Action("Details", new {id = item.ProductId})">
+                    <i class="fa fa-info"></i>
+                </a>
+                <a class="btn btn-danger" onclick="Delete(@item.ProductId)">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">افزودن گروه جدید</h5>
+                <div class="pull-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="modalBody">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+@section Scripts
+{
+    <script>
+
+        function Delete(id) {
+            $.get("/Admin/Products/Delete/" + id,
+                function (result) {
+                    $("#modal").modal();
+                    $("#modalTitle").html("حذف گروه");
+                    $("#modalBody").html(result);
+                });
+        }
+
+    </script>
+}

@@ -37,7 +37,7 @@ namespace Data.Context
         public DbSet<ProductGalleries> ProductGalleries { get; set; }
         public DbSet<ProductTags> ProductTags { get; set; }
         public DbSet<ProductGroups> ProductGroups { get; set; }
-        public SelectedProductGroup SelectedProductGroup { get; set; }
+        public DbSet<SelectedProductGroup> SelectedProductGroup { get; set; }
         public DbSet<SiteVisit> SiteVisits { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Addresses> Addresses { get; set; }

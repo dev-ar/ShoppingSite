@@ -16,7 +16,7 @@
         </ol>
     </div><!-- /.col -->
 }
-   
+   <a class="btn btn-success" href="@Url.Action("Create")">افزودن کاربر جدید</a>
 <div class="input-group input-group-sm col-md-6 " style="margin: auto; margin-bottom: 30px">
     <input class="form-control form-control-navbar" type="search" placeholder="جستجو" aria-label="Search">
     <div class="input-group-append">
@@ -72,13 +72,13 @@
             @item.LastLoginDate.ToShamsi()
         </td>
         <td>
-            <a class=" btn btn-warning" href="Users/Edit/@item.UserId">
+            <a class=" btn btn-warning" href="@Url.Action("Edit", new {id = item.UserId})">
                 <i class="fa fa-edit"></i>
             </a>
              <a class="btn btn-info" href="Users/Details/@item.UserId">
                  <i class="fa fa-info"></i>
              </a> 
-             <a class="btn btn-danger" href="Users/Delete/@item.UserId">
+             <a class="btn btn-danger" onclick="Delete(@item.UserId)">
                  <i class="fa fa-trash"></i>
              </a> 
         </td>
@@ -86,3 +86,40 @@
 }
 
 </table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">افزودن گروه جدید</h5>
+                <div class="pull-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="modalBody">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+@section Scripts
+{
+    <script>
+
+        function Delete(id) {
+            $.get("/Admin/Users/Delete/" + id,
+                function (result) {
+                    $("#modal").modal();
+                    $("#modalTitle").html("حذف گروه");
+                    $("#modalBody").html(result);
+                });
+        }
+
+    </script>
+}

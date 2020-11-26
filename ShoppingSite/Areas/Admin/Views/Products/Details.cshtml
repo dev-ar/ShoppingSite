@@ -1,0 +1,102 @@
+﻿@using Utilities
+@model Domain.Products
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>اطلاعات محصول</h2>
+<hr/>
+<div class="row">
+    <div class="col-md-8">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductTitle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductTitle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ShortDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ShortDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.Raw(Model.Description)
+            </dd>
+
+            <dt>
+            @Html.DisplayNameFor(model => model.Price)
+
+            <dd>
+                @Model.Price.ToString("#,0 تومان")
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductRate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductRate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </dt>
+
+            <dd>
+                @Model.CreateDate.ToShamsi()
+            </dd>
+            <dt>
+                برچسب‌ها
+            </dt>
+
+            @{
+                var tag = string.Join(".", Model.ProductTags.Select(t => t.Tag));
+            }
+
+            <dd>
+                @tag
+            </dd>
+        </dl>
+        <a class="btn btn-warning" href="@Url.Action("Edit", new {id = Model.ProductId})">ویرایش</a>
+    </div>
+    <div class="col-md-4">
+
+        <div class="card">
+            <h5 class="card-header">تصویر</h5>
+            <div class="card-body">
+                <img class="img-thumbnail" width="600" height="500" style="margin: auto; margin-bottom: 20px" src="/Images/ProductImages/@Model.ImageName" alt=""/>
+            </div>
+        </div>
+        
+
+        <div class="card">
+            <h5 class="card-header">گروه‌های محصول</h5>
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach (var item in Model.SelectedProductGroups)
+                    {
+                        <li class="list-group-item">
+                            <span>@item.ProductGroups.GroupTitle</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+      
+        
+        
+
+    </div>
+</div>
+

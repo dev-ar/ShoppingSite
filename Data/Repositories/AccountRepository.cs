@@ -70,5 +70,15 @@ namespace Data
         {
             return db.ProductGroups.Where(g => g.ParentId == groupId);
         }
+
+        public IEnumerable<ProductTags> GetTagsByProductId(int productId)
+        {
+            return db.ProductTags.Where(t => t.ProductId == productId);
+        }
+
+        public IEnumerable<SelectedProductGroup> GetSelectedPGsByProductId(int productId)
+        {
+            return db.SelectedProductGroup.Where(g => g.ProductId == productId);
+        }
     }
 }

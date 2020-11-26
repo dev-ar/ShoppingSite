@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Domain
 {
@@ -26,20 +27,22 @@ namespace Domain
 
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DisplayName("توضیحات")]
+        [AllowHtml]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
 
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [DisplayName("قیمت")]
         public int Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "لطفا {0} را انتخاب کنید.")]
         [DisplayName("تصویر")]
         [MaxLength(50)]
         public string ImageName { get; set; }
 
-        [Range(1,5)]
+        [Range(0,5)]
         [DisplayName("امتیاز محصول")]
-        [Required]
         public decimal ProductRate { get; set; }    
 
         [DisplayName("تاریخ ثبت")]
@@ -57,11 +60,11 @@ namespace Domain
             ProductComments = new HashSet<ProductComments>();
         }
 
-        public ICollection<ProductComments> ProductComments { get; set; }
-        public ICollection<SelectedProductGroup> SelectedProductGroups { get; set; }    
-        public ICollection<ProductFeatures> ProductFeatures { get; set; }
-        public ICollection<ProductGalleries> ProductGalleries { get; set; }
-        public ICollection<ProductTags> ProductTags{ get; set; }
-        public ICollection<OrderDetails> OrderDetails { get; set; }   
+        public virtual ICollection<ProductComments> ProductComments { get; set; }
+        public virtual ICollection<SelectedProductGroup> SelectedProductGroups { get; set; }    
+        public virtual ICollection<ProductFeatures> ProductFeatures { get; set; }
+        public virtual ICollection<ProductGalleries> ProductGalleries { get; set; }
+        public virtual ICollection<ProductTags> ProductTags{ get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }   
     }
 }

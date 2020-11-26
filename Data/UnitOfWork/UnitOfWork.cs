@@ -27,29 +27,51 @@ namespace Data
 
 
         private GenericRepository<OrderDetails> _orderDetailsRepository;
-        public GenericRepository<OrderDetails> OrderDetailsRepository => _orderDetailsRepository ??= new GenericRepository<OrderDetails>(db);
+        public GenericRepository<OrderDetails> OrderDetailsRepository =>
+            _orderDetailsRepository ??= new GenericRepository<OrderDetails>(db);
 
 
         private GenericRepository<Products> _productsRepository;
         public GenericRepository<Products> ProductsRepository => _productsRepository ??= new GenericRepository<Products>(db);
 
+        private GenericRepository<ProductFeatures> _productFeaturesRepository;
+        public GenericRepository<ProductFeatures> ProductFeaturesRepository =>
+            _productFeaturesRepository ??= new GenericRepository<ProductFeatures>(db);
 
-        public GenericRepository<ProductFeatures> ProductFeaturesRepository { get; }
-        public GenericRepository<Features> FeaturesRepository { get; }
+        private GenericRepository<Features> _featuresRepository;
+        public GenericRepository<Features> FeaturesRepository =>
+            _featuresRepository ??= new GenericRepository<Features>(db);
 
 
         private GenericRepository<ProductGroups> _productGroupsRepository;
-
         public GenericRepository<ProductGroups> ProductGroupsRepository =>
             _productGroupsRepository ??= new GenericRepository<ProductGroups>(db);
 
+        private GenericRepository<SelectedProductGroup> _selectedProductGroupsRepository;
+        public GenericRepository<SelectedProductGroup> SelectedProductGroupRepository =>
+            _selectedProductGroupsRepository ??= new GenericRepository<SelectedProductGroup>(db);
 
-        public GenericRepository<SelectedProductGroup> SelectedProductGroupRepository { get; }
-        public GenericRepository<ProductGalleries> ProductGalleriesRepository { get; }
-        public GenericRepository<ProductTags> ProductTagsRepository { get; }
-        public GenericRepository<ProductComments> ProductCommentsRepository { get; }
-        public GenericRepository<SiteVisit> SiteVisitRepository { get; }
-        public GenericRepository<Slider> SliderRepository { get; }
+        private GenericRepository<ProductGalleries> _productGalleryRepository;
+        public GenericRepository<ProductGalleries> ProductGalleriesRepository =>
+            _productGalleryRepository ??= new GenericRepository<ProductGalleries>(db);
+
+        private GenericRepository<ProductTags> _productTagsRepository;
+
+        public GenericRepository<ProductTags> ProductTagsRepository =>
+            _productTagsRepository ??= new GenericRepository<ProductTags>(db);
+
+        private GenericRepository<ProductComments> _productCommentsRepository;
+
+        public GenericRepository<ProductComments> ProductCommentsRepository =>
+            _productCommentsRepository ??= new GenericRepository<ProductComments>(db);
+
+        private GenericRepository<SiteVisit> _siteVisitRepository;
+
+        public GenericRepository<SiteVisit> SiteVisitRepository =>
+            _siteVisitRepository ??= new GenericRepository<SiteVisit>(db);
+
+        private GenericRepository<Slider> _sliderRepository;
+        public GenericRepository<Slider> SliderRepository => _sliderRepository ??= new GenericRepository<Slider>(db);
 
         private GenericRepository<Addresses> _addressesRepository;
         public GenericRepository<Addresses> AddressesRepository => _addressesRepository ??= new GenericRepository<Addresses>(db);

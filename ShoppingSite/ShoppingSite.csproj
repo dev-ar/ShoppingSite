@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\ProductImages\White.jpg" />
     <Content Include="Content\js\jquery-3.5.1.min.js" />
     <Content Include="Areas\Admin\Content\alter\dist\css\adminlte.css" />
     <Content Include="Areas\Admin\Content\alter\dist\css\adminlte.min.css" />
@@ -904,6 +905,7 @@
     <Content Include="Areas\Admin\Content\alter\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Areas\Admin\Content\alter\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Areas\Admin\Content\bootstrap-rtl.min.css" />
+    <Content Include="Images\ProductImages\Default.png" />
     <Content Include="Scripts\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -1106,6 +1108,12 @@
     <Content Include="Areas\Admin\Views\ProductGroups\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ProductGroups\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductGroups\ListGroups.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Gallery.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1125,6 +1133,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductGroupsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\User\Controllers\AddressesController.cs" />
     <Compile Include="Areas\User\Controllers\UserAccountController.cs" />
@@ -1173,6 +1182,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\User\Data\" />
+    <Folder Include="Images\ProductImages\Resized\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

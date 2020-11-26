@@ -29,7 +29,8 @@ namespace Domain
         public string Text { get; set; }
 
         [Range(1,5)]
-        [DisplayName("امتیاز")]
+        [DisplayName("امتیاز")] 
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         public decimal Rate { get; set; }   
 
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]

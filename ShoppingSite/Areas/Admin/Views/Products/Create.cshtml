@@ -1,0 +1,318 @@
+﻿@using Domain
+@model ViewModel.AddProductsViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>افزودن محصول جدید</h2>
+<style>
+    span {
+        cursor: default;
+    }
+</style>
+
+
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <hr />
+    <div class="row">
+
+        <div class="col-md-8">
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ProductId)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProductTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.ProductTitle, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProductTitle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">کلمات کلیدی </label>
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control", placeholder = "کلمات را با نقطه(.) جدا کنید." } })
+                        @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="ثبت محصول" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">قیمت (تومان) </label>
+                <div class="">
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="card">
+                <h5 class="card-header">تصویر</h5>
+                <div class="card-body">
+                    <img id="ProductImagePV" class="img-thumbnail" width="600" height="500" style="margin: auto; margin-bottom: 20px" src="/Images/ProductImages/Default.png" alt="" />
+                    <div class="">
+                        <div class="col-md-12">
+                            <input type="file" class="form-control-file" name="ImageProduct" id="ProductImageInput" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (ViewBag.ErrorPG == true)
+            {
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span>لطفا حداقل یک گروه را انتخاب کنید.</span>
+                </div>
+            }
+
+            <div class="card">
+                <h5 class="card-header">انتخاب گروه </h5>
+                <div class="card-body">
+                    @{
+                        List<ProductGroups> groups = ViewBag.ProductGroups;
+                        <ul class="list-group ">
+
+                            @foreach (var item in groups.Where(g => g.ParentId == null))
+                            {
+
+                                <li style="font-size: 30px" class="list-group-item list-group-item-secondary">
+                                    <span>@item.GroupTitle</span>
+                                    <i onclick="Minimize(@item.GroupId)" class="fa fa-window-minimize float-left" style="cursor: pointer"></i>
+                                </li>
+                                if (groups.Any(g => g.ParentId == item.GroupId))
+                                {
+                                    <div style="display: none" id="@item.GroupId">
+
+                                        @foreach (var subGroup in groups.Where(g => g.ParentId == item.GroupId))
+                                        {
+
+                                            if (groups.Any(g => g.ParentId == subGroup.GroupId))
+                                            {
+                                                <li style="font-size: 22px" class="list-group-item list-group-item-light">
+                                                    <span>@subGroup.GroupTitle</span>
+                                                </li>
+                                                foreach (var thirdSub in groups.Where(g => g.ParentId == subGroup.GroupId))
+                                                {
+                                                    <li class="list-group-item">
+                                                        <input name="SelectedPG" id="@thirdSub.GroupId" value="@thirdSub.GroupId" type="checkbox" /> <span>@thirdSub.GroupTitle</span>
+                                                    </li>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li style="font-size: 15px" class="list-group-item">
+                                                    <input name="SelectedPG" value="@subGroup.GroupId" type="checkbox" /> <span>@subGroup.GroupTitle</span>
+                                                </li>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script>
+        function Minimize(id) {
+            var nav = document.getElementById(id);
+            if (nav.style.display === 'none') {
+                nav.style.display = 'block';
+                nav.style.opacity = 1;
+            } else {
+                nav.style.display = 'none';
+                nav.style.opacity = 0;
+
+            }
+        }
+        //$(document).ready( function () {
+
+        //    $("input[name='bla[]']").each( function () {
+        //        alert( $(this).val() );
+        //    });
+
+        //});
+      
+        @*$(document).ready(function() {
+            $.getJSON("/admin/GetSelectedPG/" + @Model.ProductId,
+                function(result) {
+                    $.each(result,
+                        function(index, item) {
+                            $("input[name='SelectedPG']").each(function() {
+                                //alert($(this).val());
+                                //alert(item);
+                                //alert($(this).val());
+                                var integer = parseInt($(this).val(), 10);
+                                if (integer === item) {
+                                    var sick = document.getElementById($(this).val());
+                                    sick.checked = true;
+                                    //$('#$(this).val()').prop('checked', true);
+                                    //$("input[id = 133]").prop('checked', true);
+                                    //$(integer).prop('checked', true);
+                                }
+                            });
+                        });
+
+                });
+        });*@
+        //$("input[name='SelectedPG']").each( function (index) {
+        //    $.each(result,
+        //        function(Index, item) {
+        //            if (item.Value === index.val()) {
+        //                console.log(item.Value);
+        //                index.prop('checked', true);
+        //            }
+        //        }
+        //    );
+        //});
+        //$('#test').prop('checked', true);
+
+        //alert( $(this).val() );
+        //$.each(result,
+        //    function(item) {
+        //        if (item === $()) {
+
+        //        }
+        //    }
+        //)
+
+
+        //$('SelectedPG').change(function () {
+        //    var loading = $('<option></option>').text("شهر");
+        //    $('#city').attr("disabled", "disabled").empty().append(loading);
+
+        //    $.getJSON("/user/GetCities/" + $("#state > option:selected").attr("value"),
+        //        function (result) {
+        //            $("#city").removeAttr("disabled").empty().append($("<option>").val("").text("انتخاب کنید"));
+
+        //            $.each(result,
+        //                function (index, item) {
+        //                    $("#city").append($("<option></option>").val(item.Value).text(item.Text));
+        //                });
+        //        });
+
+        //});
+
+        //function togNav() {
+        //    var nav = document.getElementById("nav");
+        //    if (nav.style.width == '200px') {
+        //        nav.style.width = '0';
+        //        nav.style.opacity = 0;
+        //    } else {
+        //        nav.style.width = "200px";
+        //        nav.style.opacity = 1;
+        //    }
+        //}
+        //function format(input) {
+        //    var nStr = input.value + '';
+        //    nStr = nStr.replace(/\,/g, "");
+        //    var x = nStr.split('.');
+        //    var x1 = x[0];
+        //    var x2 = x.length > 1 ? '.' + x[1] : '';
+        //    var rgx = /(\d+)(\d{3})/;
+        //    while (rgx.test(x1)) {
+        //        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        //    }
+        //    input.value = parseInt(x1 + x2, 10);
+
+        //}
+        //function digitGroup(dInput) {
+        //    var output = "";
+        //    try {
+        //        dInput = dInput.replace(/[^0-9]/g, ""); // remove all chars including spaces, except digits.
+        //        var totalSize = dInput.length;
+        //        for (var i = totalSize - 1; i > -1; i--) {
+        //            output = dInput.charAt(i) + output;
+        //            var cnt = totalSize - i;
+        //            if (cnt % 3 === 0 && i !== 0) {
+        //                output = " " + output; // seperator is " "
+        //            }
+        //        }
+        //    } catch (err) {
+        //        output = dInput; // it won't happen, but it's sweet to catch exceptions.
+        //    }
+        //    return output;
+        //}
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#ProductImagePV').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#ProductImageInput").change(function() {
+            readURL(this);
+        });
+    </script>
+    <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+    <script>
+        //$(function() {
+        //    $("#Description").ckeditor();
+
+        //});
+        CKEDITOR.replace('Description');
+        //CKEDITOR.replace('Description', {
+        //    htmlEncodeOutput: true });
+        //CKEDITOR.replace( '', {
+        //    filebrowserBrowseUrl: '/browser/browse.php',
+        //    filebrowserUploadUrl: '/uploader/upload.php'
+        //});
+        //CKEDITOR.replace( 'Description', {
+        //    filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
+        //    filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+        //});
+
+        //var editor = CKEDITOR.replace( 'Description' );
+        //CKFinder.setupCKEditor( editor );
+
+        //var editor = CKEDITOR.replace( 'Description' );
+        //CKFinder.setupCKEditor( editor );
+    </script>
+
+}
+
+
+
+
+

@@ -54,7 +54,7 @@
  {
     <script>
         function Create(id) {
-            $.get("/admin/AddPG/" + id,
+            $.get("/admin/ProductGroups/Add/" + id,
                 function (result) {
                     $("#modal").modal();
                     $("#modalTitle").html("افزودن گروه جدید");
@@ -62,7 +62,7 @@
                 });
         }
         function Edit(id) {
-            $.get("/admin/EditPG/" + id,
+            $.get("/admin/ProductGroups/Edit/" + id,
                 function (result) {
                     $("#modal").modal();
                     $("#modalTitle").html("ویرایش گروه");
@@ -71,7 +71,7 @@
         }
 
         function Delete(id) {
-            $.get("/admin/DeletePG/" + id,
+            $.get("/admin/ProductGroups/Delete/" + id,
                 function (result) {
                     $("#modal").modal();
                     $("#modalTitle").html("حذف گروه");

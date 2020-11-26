@@ -1,0 +1,110 @@
+﻿@using Domain
+@model ViewModel.AddGalleryViewModel
+
+@{
+    ViewBag.Title = "Gallery";
+}
+
+<h2>گالری محصول</h2>
+<hr />
+@using (Html.BeginForm("Gallery", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal col-md-4">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GalleryTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.GalleryTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GalleryTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @if (Request.QueryString["img"] == "error")
+            {
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span>لطفا تصویر را انتخاب کنید.</span>
+                </div>
+            }
+
+            <div class="form-group">
+                <label class="control-label">تصویر</label>
+                <div class="col-md-12">
+                    <img id="image" class="img-thumbnail" width="600" height="500" style="margin: auto; margin-bottom: 20px" src="/Images/ProductImages/White.jpg" alt="" />
+                    <input id="imgInput" type="file" name="imgUp" />
+                </div>
+            </div>
+        
+            @*<div class="card">
+                    <h5 class="card-header">تصویر</h5>
+                    <div class="card-body">
+                        <img id="ProductImagePV" class="img-thumbnail" width="600" height="500" style="margin: auto; margin-bottom: 20px" src="/Images/ProductImages/Default.png" alt="" />
+                        <div class="">
+                            <div class="col-md-12">
+                                <input type="file" class="form-control-file" name="ImageProduct" id="ProductImageInput" />
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="form-group">
+                <div class=" col-md-12">
+                    <input style="width: 100%" type="submit" value="ثبت تصویر" class="btn btn-success" />
+                </div>
+            </div>
+
+        </div>
+        @{
+            List<ProductGalleries> gallery = ViewBag.Gallery;
+        }
+        <div class="col-md-8">
+            <table class="table table-borderless">
+                <tr>
+                    <th>تصویر</th>
+                    <th>عنوان</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in gallery)
+                {
+                    <tr>
+                        <td>
+                            <img class="img-thumbnail" src="/Images/ProductImages/Resized/@item.ImageName" />
+                        </td>
+                        <td>
+                            @item.GalleryTitle
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" href="/Admin/Products/Gallery/Delete//@item.GalleryId">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#imgInput").change(function() {
+            readURL(this);
+        });
+    </script>
+}

@@ -33,7 +33,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
             return PartialView(db.ProductGroupsRepository.GetAll());
         }
         // GET: Admin/ProductGroups/Create
-        [Route("AddPG/{id}")]
+        [Route("ProductGroups/Add/{id}")]
         public ActionResult Create(int? id)
         {
             if (db.ProductGroupsRepository.GetById(id) == null && id != 0)
@@ -48,7 +48,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("AddPG/{id}")]
+        [Route("ProductGroups/Add/{id}")]
         public ActionResult Create(int id, [Bind(Include = "GroupTitle")] AddProductGroupsViewModel model)
         {
             if (!ModelState.IsValid) return PartialView(model);
@@ -68,7 +68,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
         }
 
         //GET: Admin/ProductGroups/Edit/5
-        [Route("EditPG/{id}")]
+        [Route("ProductGroups/Edit/{id}")]
         public ActionResult Edit(int id)
         {
             var productGroups = db.ProductGroupsRepository.GetById(id);
@@ -90,7 +90,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("EditPG/{id}")]
+        [Route("ProductGroups/Edit/{id}")]
         public ActionResult Edit([Bind(Include = "GroupId,GroupTitle,ParentId")] ProductGroups productGroups)
         {
             if (!ModelState.IsValid) return PartialView(productGroups);
@@ -101,7 +101,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
         }
 
         // GET: Admin/ProductGroups/Delete/5
-        [Route("DeletePG/{id}")]
+        [Route("ProductGroups/Delete/{id}")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -120,7 +120,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
         //// POST: Admin/ProductGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Route("DeletePG/{id}")]
+        [Route("ProductGroups/Delete/{id}")]
         public ActionResult DeleteConfirmed(int id)
         {
             var pg = db.ProductGroupsRepository.GetById(id);

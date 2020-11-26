@@ -19,5 +19,7 @@ namespace Data
         IEnumerable<Cities> GetCitiesByStateId(int id);
         IEnumerable<ProductGroups> GetMainProductGroups();
         IEnumerable<ProductGroups> GetAllSubGroups(int groupId);
+        IEnumerable<ProductTags> GetTagsByProductId(int productId);
+        IEnumerable<SelectedProductGroup> GetSelectedPGsByProductId(int productId);
     }
 }
