@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Domain.Features>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>ویژگی‌های محصولات</h2>
+
+<p>
+    <a class="btn btn-success" onclick="Create()">
+        افزودن ویژگی جدید
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductGroups.GroupTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeatureTitle)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.GroupId == null)
+                {
+                    <span>عمومی</span>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.ProductGroups.GroupTitle)
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeatureTitle)
+            </td>
+            <td>
+                <a class="btn btn-warning" onclick="Edit(@item.FeatureId)">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a class="btn btn-danger" onclick="Delete(@item.FeatureId)">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">افزودن گروه جدید</h5>
+                <div class="pull-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="modalBody">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+
+
+
+
+@section Scripts
+{
+    <script>
+        function Create() {
+            $.get("/admin/Features/Add",
+                function (result) {
+                    $("#modal").modal();
+                    $("#modalTitle").html("افزودن ویژگی جدید");
+                    $("#modalBody").html(result);
+                });
+        }
+        function Edit(id) {
+            $.get("/admin/Features/Edit/" + id,
+                function (result) {
+                    $("#modal").modal();
+                    $("#modalTitle").html("ویرایش ویژگی");
+                    $("#modalBody").html(result);
+                });
+        }
+
+        function Delete(id) {
+            $.get("/admin/Features/Delete/" + id,
+                function (result) {
+                    $("#modal").modal();
+                    $("#modalTitle").html("حذف ویژگی");
+                    $("#modalBody").html(result);
+                });
+        }
+    </script>
+}
+

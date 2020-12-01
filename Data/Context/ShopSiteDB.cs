@@ -43,5 +43,7 @@ namespace Data.Context
         public DbSet<Addresses> Addresses { get; set; }
         public DbSet<States> States { get; set; }
         public DbSet<Cities> Cities { get; set; }
+
+        public System.Data.Entity.DbSet<Domain.ProductComments> ProductComments { get; set; }
     }
 }

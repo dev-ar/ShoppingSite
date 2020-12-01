@@ -1,0 +1,17 @@
+﻿@model Domain.Features
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h5>آیا از حذف ویژگی "@Model.FeatureTitle" مطمئن هستید؟</h5>
+<div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <br />
+        <input type="submit" value="حذف" class="btn btn-danger" />
+}
+</div>

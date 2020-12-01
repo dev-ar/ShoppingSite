@@ -38,30 +38,32 @@ namespace ShoppingSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.AccountRepository.ExistCheck(register.Email))
+                if (db.AccountRepository.ExistCheck(register.Email) == false)
                 {
-                    var user = new Users
-                    {
-                        UserName = register.UserName.Trim(),
-                        Email = register.Email.Trim().ToLower(),
-                        Password = register.Password.HashPassword(),
-                        ActiveCode = Guid.NewGuid().ToString(),
-                        IsActive = false,
-                        RegisterDate = DateTime.Now,
-                        RoleId = 1,
-                        LastLoginDate = DateTime.Now,
-                        LastLoginIp = AccountsUtilities.GetUserIp(),
-                    };
-                    db.UsersRepository.Insert(user);
-                    db.Save();
-
-                    var body = PartialToStringClass.RenderPartialView("ManageEmails", "ActivationEmail", user);
-
-                    SendEmail.Send(user.Email, "فعالسازی حساب کاربری فروشگاه بامیلو", body);
-
-                    return View("SuccessRegister", user);
+                    ModelState.AddModelError("Email", "ایمیل قبلا در سیستم ثبت شده است.");
+                    return View(register);
                 }
-                ModelState.AddModelError("Email", "ایمیل قبلا در سیستم ثبت شده است.");
+
+                var user = new Users
+                {
+                    UserName = register.UserName.Trim(),
+                    Email = register.Email.Trim().ToLower(),
+                    Password = register.Password.HashPassword(),
+                    ActiveCode = Guid.NewGuid().ToString(),
+                    IsActive = false,
+                    RegisterDate = DateTime.Now,
+                    RoleId = 1,
+                    LastLoginDate = DateTime.Now,
+                    LastLoginIp = AccountsUtilities.GetUserIp(),
+                };
+                db.UsersRepository.Insert(user);
+                db.Save();
+
+                var body = PartialToStringClass.RenderPartialView("ManageEmails", "ActivationEmail", user);
+
+                SendEmail.Send(user.Email, "فعالسازی حساب کاربری فروشگاه بامیلو", body);
+
+                return View("SuccessRegister", user);
             }
             return View(register);
         }
@@ -85,17 +87,19 @@ namespace ShoppingSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.AccountRepository.LoginCheck(login.Email, login.Password))
+                if (db.AccountRepository.LoginCheck(login.Email, login.Password) == false)
                 {
-                    FormsAuthentication.SetAuthCookie(login.Email.Trim().ToLower(), login.RememberMe);
-                    var user = db.AccountRepository.GetUserByEmail(login.Email.Trim().ToLower());
-                    user.LastLoginDate = DateTime.Now;
-                    user.LastLoginIp = AccountsUtilities.GetUserIp();
-                    db.Save();
-                    return Redirect(ReturnUrl);
+                    ModelState.AddModelError("Email", "ایمیل یا رمز عبور شما صحیح نمی‌باشد.");
+                    return View();
                 }
+
+                FormsAuthentication.SetAuthCookie(login.Email.Trim().ToLower(), login.RememberMe);
+                var user = db.AccountRepository.GetUserByEmail(login.Email.Trim().ToLower());
+                user.LastLoginDate = DateTime.Now;
+                user.LastLoginIp = AccountsUtilities.GetUserIp();
+                db.Save();
+                return Redirect(ReturnUrl);
             }
-            ModelState.AddModelError("Email", "ایمیل یا رمز عبور شما صحیح نمی‌باشد.");
             return View();
         }
 
@@ -121,21 +125,22 @@ namespace ShoppingSite.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var user = db.AccountRepository.GetUserByEmail(model.Email);
-                if (user != null)
+                if (user == null)
                 {
-                    if (user.IsActive)
-                    {
-                        var body = PartialToStringClass.RenderPartialView("ManageEmails", "RecoveryPassword", user);
-                        SendEmail.Send(user.Email,"بازیابی رمز عبور",body);
-                        ViewBag.IsSuccess = true;
-                        return View();
-                    }
+                    ModelState.AddModelError("Email", "کاربری با این مشخصات یافت نشد");
+                    return View();
+                }
+
+                if (user.IsActive == false)
+                {
                     ModelState.AddModelError("Email", "حساب کاربری وارد شده فعال نیست.");
                     return View();
                 }
-                ModelState.AddModelError("Email", "کاربری با این مشخصات یافت نشد");
+
+                var body = PartialToStringClass.RenderPartialView("ManageEmails", "RecoveryPassword", user);
+                SendEmail.Send(user.Email, "بازیابی رمز عبور", body);
+                ViewBag.IsSuccess = true;
                 return View();
             }
             return View();
@@ -167,7 +172,7 @@ namespace ShoppingSite.Controllers
         [HttpPost]
         [Route("RecoveryPassword/{id}")]
         [ValidateAntiForgeryToken]
-        public ActionResult RecoveryPassword(string id,[Bind(Include = "Password,PasswordConfirmation")]RecoveryPasswordViewModel model)
+        public ActionResult RecoveryPassword(string id, [Bind(Include = "Password,PasswordConfirmation")] RecoveryPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {

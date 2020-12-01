@@ -76,6 +76,7 @@
     <Compile Include="AccountViewModel.cs" />
     <Compile Include="AdminPanel\ProductsViewModel.cs" />
     <Compile Include="AdminPanel\UsersViewModel.cs" />
+    <Compile Include="ProductsViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserPanel\AddAddressViewModel.cs" />
     <Compile Include="UserPanel\UserEditViewModel.cs" />

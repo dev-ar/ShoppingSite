@@ -35,6 +35,11 @@ body {
     overflow-x: hidden;
 }
 
+.field-validation-valid {
+    display: none;
+}
+
+
 #FaFont {
     font-family: 'yekan', 'numbers';
 }
@@ -720,7 +725,6 @@ a, span, label, i, p, div {
 
 .last-products article > div > div {
     margin-bottom: 15px;
-    padding: 0 5px
 }
 
 

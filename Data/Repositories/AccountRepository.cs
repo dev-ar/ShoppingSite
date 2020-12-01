@@ -80,5 +80,31 @@ namespace Data
         {
             return db.SelectedProductGroup.Where(g => g.ProductId == productId);
         }
+
+        public IEnumerable<ProductGroups> GetSelectableGroups()
+        {
+            var groups = new List<ProductGroups>();
+            foreach (var main in db.ProductGroups.ToList().Where(g => g.ParentId == null))
+            {
+                foreach (var subGroups in db.ProductGroups.ToList().Where(g => g.ParentId == main.GroupId))
+                {
+                    if (db.ProductGroups.Any(g => g.ParentId == subGroups.GroupId))
+                    {
+                        foreach (var thirdSub in db.ProductGroups.ToList().Where(g => g.ParentId == subGroups.GroupId))
+                        {
+                            groups.Add(thirdSub);
+                        }
+                    }
+                    else
+                    {
+                        groups.Add(subGroups);
+                    }
+
+                }
+
+            }
+
+            return groups;
+        }
     }
 }

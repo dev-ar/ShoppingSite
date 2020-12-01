@@ -43,7 +43,7 @@
     {
         <tr>
             <td>
-                <img class="img-thumbnail" style="max-width: 150px" src="/Images/ProductImages/@item.ImageName" />
+                <img class="img-thumbnail" style="max-width: 150px" src="/Images/ProductImages/Resized/@item.ImageName" />
             </td>
             <td>
                 @{
@@ -73,7 +73,7 @@
             </td>
             <td>
                 <a class="btn btn-default" href="@Url.Action("Gallery", new {id = item.ProductId})">گالری</a>
-                <a class="btn btn-default">ویژگی‌</a>
+                <a class="btn btn-default" href="@Url.Action("ProductFeatures", new {id = item.ProductId})">ویژگی‌</a>
 
 
                 <a class=" btn btn-warning" href="@Url.Action("Edit", new {id = item.ProductId})">

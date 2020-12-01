@@ -24,6 +24,8 @@ namespace ShoppingSite.Areas.Admin.Controllers
     {
         UnitOfWork db = new UnitOfWork(new ShopSiteDB());
 
+        #region Product
+
         [Route("Products")]
         public ActionResult Index()
         {
@@ -73,26 +75,43 @@ namespace ShoppingSite.Areas.Admin.Controllers
                     return View(model);
                 }
 
-                var imageName = "Default.png";
-                if (imageProduct != null && imageProduct.IsImage())
-                {
-                    imageName = Guid.NewGuid() + Path.GetExtension(imageProduct.FileName);
-                    imageProduct.SaveAs(Server.MapPath("/Images/ProductImages/" + imageName));
-                    var img = new ImageResizer();
-                    img.Resize(Server.MapPath("/Images/ProductImages/" + imageName),
-                        Server.MapPath("/Images/ProductImages/Resized/" + imageName));
-                }
-
                 var product = new Products
                 {
                     ProductTitle = model.ProductTitle,
                     ShortDescription = model.ShortDescription,
                     Description = model.Description,
                     Price = model.Price,
-                    ImageName = imageName,
                     ProductRate = 0,
                     CreateDate = DateTime.Now
                 };
+
+
+
+                //Insert Tags
+                if (string.IsNullOrEmpty(model.Tags) == false)
+                {
+                    var tags = model.Tags.Split('.');
+                    foreach (var tag in tags)
+                    {
+                        if (string.IsNullOrEmpty(tag))
+                        {
+                            ViewBag.ProductGroups = db.ProductGroupsRepository.GetAll();
+                            ModelState.AddModelError("Tags", "لطفا کلمات کلیدی را به درستی با نقطه(.) جدا کنید.");
+                            return View(model);
+                        }
+
+                        db.ProductTagsRepository.Insert(new ProductTags
+                        {
+                            ProductId = product.ProductId,
+                            Tag = tag.Trim()
+                        });
+                    }
+                }
+
+                product.ImageName = "Default.png";
+                if (imageProduct != null && imageProduct.IsImage())
+                    product.ImageName = Guid.NewGuid() + Path.GetExtension(imageProduct.FileName);
+
                 db.ProductsRepository.Insert(product);
 
                 foreach (var item in selectedPg)
@@ -104,40 +123,15 @@ namespace ShoppingSite.Areas.Admin.Controllers
                     });
                 }
 
-                if (string.IsNullOrEmpty(model.Tags) == false)
-                {
-                    var tags = model.Tags.Split('.');
-                    foreach (var tag in tags)
-                    {
-                        db.ProductTagsRepository.Insert(new ProductTags
-                        {
-                            ProductId = product.ProductId,
-                            Tag = tag.Trim()
-                        });
-                    }
-                }
-
-                //try
-                //{
-                // Your code...
-                // Could also be before try if you know the exception occurs in SaveChanges
-
                 db.Save();
-                //}
-                //catch (DbEntityValidationException e)
-                //{
-                //    foreach (var eve in e.EntityValidationErrors)
-                //    {
-                //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                //        foreach (var ve in eve.ValidationErrors)
-                //        {
-                //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                //                ve.PropertyName, ve.ErrorMessage);
-                //        }
-                //    }
-                //    throw;
-                //}
+
+                if (product.ImageName != "Default.png")
+                {
+                    imageProduct.SaveAs(Server.MapPath("/Images/ProductImages/" + product.ImageName));
+                    var img = new ImageResizer();
+                    img.Resize(Server.MapPath("/Images/ProductImages/" + product.ImageName),
+                        Server.MapPath("/Images/ProductImages/Resized/" + product.ImageName));
+                }
 
                 return RedirectToAction("Index");
             }
@@ -328,9 +322,13 @@ namespace ShoppingSite.Areas.Admin.Controllers
                     db.ProductGalleriesRepository.Delete(item);
                 }
             }
-          
 
-
+            //Delete Features
+            if (product.ProductFeatures.Any())
+            {
+                foreach (var item in product.ProductFeatures.ToList())
+                    db.ProductFeaturesRepository.Delete(item);
+            }
 
             db.ProductsRepository.Delete(product);
 
@@ -338,7 +336,9 @@ namespace ShoppingSite.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        #endregion
 
+        #region Gallery
         [Route("Products/Gallery/{id}")]
         public ActionResult Gallery(int id)
         {
@@ -350,7 +350,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
 
             ViewBag.Gallery = db.ProductGalleriesRepository.GetAll().Where(g => g.ProductId == id).ToList();
 
-             return View();
+            return View();
         }
 
         [HttpPost]
@@ -407,6 +407,50 @@ namespace ShoppingSite.Areas.Admin.Controllers
             return RedirectToAction("Gallery", new { id = gallery.ProductId });
         }
 
+
+        #endregion
+
+        #region Features
+
+        [Route("Products/Features/{id}")]
+        public ActionResult ProductFeatures(int id)
+        {
+            var product = db.ProductsRepository.GetById(id);
+
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            var selectedPgs = product.SelectedProductGroups.Select(t => t.GroupId).ToList();
+
+            //Insert Public and Related Features
+            var features = db.FeaturesRepository.GetAll().Where(f => f.GroupId == null).ToList();
+            features.AddRange(selectedPgs.SelectMany(item => db.FeaturesRepository.GetAll().Where(g => g.GroupId == item)));
+
+
+            ViewBag.Features = db.ProductFeaturesRepository.GetAll().Where(f => f.ProductId == id).ToList();
+            ViewBag.FeatureId = new SelectList(features, "FeatureId", "FeatureTitle");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("Products/Features/{id}")]
+        public ActionResult ProductFeatures(int id, ProductFeatures model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ProductId = id;
+                db.ProductFeaturesRepository.Insert(model);
+                db.Save();
+                return RedirectToAction("ProductFeatures", new { id = id });
+            }
+
+            return RedirectToAction("ProductFeatures", new { id = id });
+        }
+
+        #endregion
 
 
 

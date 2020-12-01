@@ -24,7 +24,7 @@ namespace ViewModel
 
         [DisplayName("عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        [MaxLength(300)]
+        [MaxLength(65,ErrorMessage = "لطفا عنوان کوتاه‌تری انتخاب کنید")]
         public string ProductTitle { get; set; }
 
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
@@ -59,4 +59,6 @@ namespace ViewModel
 
      
     }
+
+ 
 }

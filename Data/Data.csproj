@@ -82,6 +82,14 @@
     <Compile Include="Migrations\202011121054440_fixing-models.designer.cs">
       <DependentUpon>202011121054440_fixing-models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011261553018_Features_Relation.cs" />
+    <Compile Include="Migrations\202011261553018_Features_Relation.designer.cs">
+      <DependentUpon>202011261553018_Features_Relation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011261920231_fix.cs" />
+    <Compile Include="Migrations\202011261920231_fix.designer.cs">
+      <DependentUpon>202011261920231_fix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
@@ -126,6 +134,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011121054440_fixing-models.resx">
       <DependentUpon>202011121054440_fixing-models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011261553018_Features_Relation.resx">
+      <DependentUpon>202011261553018_Features_Relation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011261920231_fix.resx">
+      <DependentUpon>202011261920231_fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

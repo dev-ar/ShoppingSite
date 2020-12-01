@@ -21,5 +21,6 @@ namespace Data
         IEnumerable<ProductGroups> GetAllSubGroups(int groupId);
         IEnumerable<ProductTags> GetTagsByProductId(int productId);
         IEnumerable<SelectedProductGroup> GetSelectedPGsByProductId(int productId);
+        IEnumerable<ProductGroups> GetSelectableGroups();
     }
 }

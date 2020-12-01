@@ -1,0 +1,45 @@
+﻿@using Utilities
+@model IEnumerable<Domain.ProductComments>
+
+
+
+    @foreach (var item in Model.Where(t => t.ParentId == null).ToList())
+    {
+        <li>
+            <a onclick="Create(@item.CommentId)" class="reply-button">پاسخ</a>
+
+            <img src="/Content/img/avatar.jpg" width="65">
+            <div>
+                <h5>ارسال شده از : @item.Users.UserName در تاریخ : @item.CreateDate.ToShamsi() </h5>
+                <p>
+                    @item.Text
+                </p>
+                <h3> <i style="color: gold; margin-left: 5px" class="fa fa-star"></i> @item.Rate </h3>
+            </div>
+            <div class="clearfix"></div>
+            <br/>
+            @if (Model.Any(c => c.ParentId == item.CommentId))
+            {
+                foreach (var subItem in Model.Where(c => c.ParentId == item.CommentId))
+                {
+                    <ul>
+                        <li>
+                            <a href="" class="reply-button">پاسخ</a>
+
+                            <img src="/Content/img/avatar.jpg" width="65">
+                            <div>
+                                <h5>ارسال شده از : @subItem.Users.UserName در تاریخ : @subItem.CreateDate.ToShamsi() </h5>
+                                <p>
+                                    @subItem.Text
+                                </p>
+                                <h3> <i style="color: gold; margin-left: 5px" class="fa fa-star"></i> @subItem.Rate </h3>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                    </ul>
+                }
+            }
+
+
+        </li>
+    }

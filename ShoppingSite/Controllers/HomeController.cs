@@ -11,11 +11,11 @@ namespace ShoppingSite.Controllers
     public class HomeController : Controller
     {
         UnitOfWork db = new UnitOfWork(new ShopSiteDB());
-        ShopSiteDB dbs = new ShopSiteDB();
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            var products = db.ProductsRepository.GetAll().OrderBy(t => t.CreateDate).Reverse().Take(12);
+            return View(products);
         }
 
         public ActionResult Slider()

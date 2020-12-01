@@ -1,0 +1,18 @@
+﻿@model Domain.Products
+<div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="border-radius">
+            @* <img class="img-thumbnail" src="/Images/ProductImages/Resized/@Model.ImageName">*@
+                <img style="width: 100%; height: 150px; max-height: 160px" src="/Images/ProductImages/@Model.ImageName" alt="@Model.ProductTitle" onclick="window.location.href = '/product/@Model.ProductId' "/>
+                <h2 onclick="window.location.href = '/product/@Model.ProductId' " style="height: 50px;">@Model.ProductTitle</h2>
+      
+            <h6>افزودن به لیست مقایسه <input type="checkbox"></h6>
+            <span class="col-md-9 col-sm-9 col-xs-9 price-layer" id="FaFont">
+                <label>@Model.Price.ToString("#,0 تومان")</label>
+            </span>
+            <a href="" class="col-md-2 col-sm-2 col-xs-2 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 buy-button border-radius">
+                <label><i class="fa fa-shopping-basket"></i></label>
+            </a>
+            <div class="clearfix"></div>
+        </div>
+
+</div>

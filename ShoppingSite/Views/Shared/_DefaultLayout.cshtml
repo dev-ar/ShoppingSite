@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/Content/css/carousel.css">
     <link rel="stylesheet" type="text/css" href="/Content/css/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="/Content/css/Style1.css">
+    <link rel="stylesheet" href="/Areas/Admin/Content/alter/dist/css/bootstrap-rtl.min.css">
     <script src="/Content/js/jquery-v1.11.3.js"></script>
 </head>
 <body>
@@ -148,7 +149,7 @@
         <!-- End compare -->
         <!-- Category -->
         @RenderSection("Groups", false)
-     
+
         <!-- End Category -->
         <!-- Category -->
         <!-- End Category -->
@@ -237,6 +238,8 @@
     <script src="/Content/js/owl.carousel.js"></script>
     <script src="/Content/js/script.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js" integrity="sha512-DedNBWPF0hLGUPNbCYfj8qjlEnNE92Fqn7xd3Sscfu7ipy7Zu33unHdugqRD3c4Vj7/yLv+slqZhMls/4Oc7Zg==" crossorigin="anonymous"></script>
+    @RenderSection("Scripts", false)
 </body>
 </html>
