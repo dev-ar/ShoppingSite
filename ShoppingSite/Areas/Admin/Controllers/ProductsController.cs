@@ -13,7 +13,7 @@ using Data;
 using Data.Context;
 using Domain;
 using InsertShowImage;
-using KooyWebApp_MVC.Classes;
+using Utilities;
 using ViewModel;
 
 namespace ShoppingSite.Areas.Admin.Controllers
@@ -64,7 +64,8 @@ namespace ShoppingSite.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Products/Add")]
-        public ActionResult Create([Bind(Include = "ProductTitle,ShortDescription,Description,Price,Tags")] AddProductsViewModel model, HttpPostedFileBase imageProduct, List<int> selectedPg)
+        public ActionResult Create([Bind(Include = "ProductTitle,ShortDescription,Description,Price,Tags")] AddProductsViewModel model,
+            HttpPostedFileBase imageProduct, List<int> selectedPg)
         {
             if (ModelState.IsValid)
             {

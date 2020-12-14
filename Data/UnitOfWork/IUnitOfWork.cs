@@ -28,6 +28,9 @@ namespace Data
         GenericRepository<States> StateRepository { get; }
         GenericRepository<Cities> CitiesRepository { get; }
         AccountRepository AccountRepository { get; }
+        ProductsCustomRepository ProductsCustomRepository { get; }
+        
+
         void Save();
         void Dispose();
     }

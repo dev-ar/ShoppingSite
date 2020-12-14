@@ -1,0 +1,131 @@
+﻿@using ViewModel
+@model IEnumerable<Domain.Addresses>
+@{
+    ViewBag.Title = "ChooseAddress";
+}
+
+
+
+@if (ViewBag.NoProduct == true)
+{
+    <div style="margin-right: 20px; margin-bottom: 20%" class="alert alert-warning">
+        <span> هیچ محصولی در سبد خرید شما یافت نشد.</span>
+    </div>
+}
+else
+{
+    List<ShowOrderViewModel> list = ViewBag.Orders;
+
+    <div class="container baskets-style margin-top-20" id="FaFont">
+
+        <div class="row basket-style">
+            <section class="border-radius">
+                <div class="tbl-head">
+                    <ul>
+                        <li> شرح محصول </li>
+                        <li> تعداد و وزن </li>
+                        <li> قیمت واحد </li>
+                        <li> قیمت کل </li>
+                    </ul>
+                </div>
+                <div class="hidden-head">
+                    سبد خرید شما
+                </div>
+                <div class="tbl-body">
+                    <!-- Each Row -->
+                    @foreach (var item in list)
+                    {
+                        <ul>
+                            <li>
+                                <a href="" class="product-image"><img class="border-radius" src="/Images/ProductImages/@item.ImageName"></a>
+                                <div class="product-info-left-side">
+                                    <a href="" class="product-title">
+                                        <h3> @item.Title </h3>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <p>
+                                    @item.Count
+                                </p>
+                            </li>
+                            <li>
+                                <label class="lbl-hidden"> قیمت واحد : </label> <span class="lbl-price"> @item.Price.ToString("#,0 تومان") </span>
+                            </li>
+                            <li>
+                                <label class="lbl-hidden"> قیمت کل : </label> <span class="lbl-price"> @item.Sum.ToString("#,0 تومان") </span>
+
+                            </li>
+                        </ul>
+                    }
+
+                    <!-- End Each Row -->
+
+                </div>
+
+
+
+                <div class="tbl-footer">
+                    <ul>
+                        <li> قیمت کل : <span> @list.Sum(s => s.Sum).ToString("#,0 تومان")</span></li>
+                        <li class="total-price"> مبلغ قابل پرداخت : <span> @list.Sum(s => s.Sum).ToString("#,0 تومان") </span></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </section>
+        </div>
+
+    </div>
+
+    if (ViewBag.AddressError == true)
+    {
+        <div style="margin-right: 20px" class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <span>لطفا یک آدرس را انتخاب کنید.</span>
+        </div>
+    }
+
+    <a href="/user/address/add" style="margin-right: 18px; margin-bottom: 20px; width: 20%" class="btn btn-primary">افزودن نشانی جدید</a>
+
+    <div class="col-md-12 col-sm-12 left-side-content internal-style" id="FaFont">
+        <section class="border-radius">
+            <header>
+                <h3 style="font-size: 20px">انتخاب نشانی</h3>
+            </header>
+            <article>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @using (Html.BeginForm("ChooseAddress", "Shop"))
+                    {
+
+
+                        <ul>
+                            @foreach (var item in Model)
+                            {
+
+                                <li>
+                                    <input type="radio" name='id' value="@item.AddressId" />
+                                    <p style="font-size: 18px;"> @item.Address پلاک @item.PlateNumber</p>
+                                    <p>
+                                        <i class="fa fa-address-card"></i><span style="margin-right: 5px; margin-top: 10px"> @item.City </span> <br />
+                                        <i class="fa fa-envelope"></i><span style="margin-right: 5px; margin-top: 10px"> @item.ZipCode </span> <br />
+                                        <i class="fa fa-phone"></i><span style="margin-right: 5px; margin-top: 10px"> @item.PhoneNumber </span> <br />
+                                        <i class="fa fa-user"></i><span style="margin-right: 5px; margin-top: 10px"> @item.ReceiverName </span>
+                                    </p>
+
+                                </li>
+                                <hr />
+                            }
+                        </ul>
+                        <input style="width: 100%" class="btn btn-success" type="submit" value="تأیید و ادامه" />
+                    }
+                </div>
+                <div class="clearfix"></div>
+
+            </article>
+
+        </section>
+
+    </div>
+}
+
+

@@ -85,7 +85,7 @@ namespace ShoppingSite.Areas.User.Controllers
         }
 
 
-        [Route("AddAddress")]
+        [Route("Address/Add")]
         public ActionResult AddAddress()
         {
             ViewBag.State = new SelectList(db.StateRepository.GetAll(), "StateId", "StateTitle");
@@ -97,7 +97,7 @@ namespace ShoppingSite.Areas.User.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("AddAddress")]
+        [Route("Address/Add")]
         public ActionResult AddAddress([Bind(Include = "State,Cities,ReceiverName,PhoneNumber,Address,PlateNumber,ZipCode,IdentificationCode")] AddAddressViewModel model)
         {
             if (ModelState.IsValid)

@@ -86,6 +86,13 @@ namespace Data
         private AccountRepository _accountRepository;
         public AccountRepository AccountRepository => _accountRepository ??= new AccountRepository(db);
 
+        private ProductsCustomRepository _productsCustomRepository;
+
+        public ProductsCustomRepository ProductsCustomRepository =>
+            _productsCustomRepository ??= new ProductsCustomRepository(db);
+
+        
+
         public void Save()
         {
             db.SaveChanges();

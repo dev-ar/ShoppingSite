@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace KooyWebApp_MVC.Classes
+namespace Utilities
 {
     public static class CheckContentImage
     {

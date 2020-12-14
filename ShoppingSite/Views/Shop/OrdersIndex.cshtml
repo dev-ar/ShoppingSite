@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "فاکتور";
+}
+
+
+<div id="ShowOrders">
+    @Html.Action("Orders")
+</div>
+
+
+
+
+@section Scripts
+{
+    <script>
+        function Commands(id, count) {
+            $.get("/Orders/Commands/" + id + "?count=" + count,
+                function(res) {
+                    $("#ShowOrders").html(res);
+                    window.CountShopCart();
+                });
+        }
+    </script>
+}

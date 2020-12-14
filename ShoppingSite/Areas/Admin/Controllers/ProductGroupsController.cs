@@ -53,7 +53,7 @@ namespace ShoppingSite.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return PartialView(model);
 
-            var PG = new ProductGroups {GroupTitle = model.GroupTitle};
+            var PG = new ProductGroups { GroupTitle = model.GroupTitle };
             if (id == 0)
             {
                 PG.ParentId = null;
@@ -64,10 +64,9 @@ namespace ShoppingSite.Areas.Admin.Controllers
             }
             db.ProductGroupsRepository.Insert(PG);
             db.Save();
-            return PartialView("ListGroups",db.ProductGroupsRepository.GetAll());
+            return PartialView("ListGroups", db.ProductGroupsRepository.GetAll());
         }
 
-        //GET: Admin/ProductGroups/Edit/5
         [Route("ProductGroups/Edit/{id}")]
         public ActionResult Edit(int id)
         {
@@ -78,16 +77,9 @@ namespace ShoppingSite.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            //var pgViewModel = new AddProductGroupsViewModel
-            //{
-            //    GroupTitle = productGroups.GroupTitle
-            //};
             return PartialView(productGroups);
         }
 
-        //POST: Admin/ProductGroups/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("ProductGroups/Edit/{id}")]
@@ -100,7 +92,6 @@ namespace ShoppingSite.Areas.Admin.Controllers
             return PartialView("ListGroups", db.ProductGroupsRepository.GetAll());
         }
 
-        // GET: Admin/ProductGroups/Delete/5
         [Route("ProductGroups/Delete/{id}")]
         public ActionResult Delete(int? id)
         {
@@ -117,27 +108,33 @@ namespace ShoppingSite.Areas.Admin.Controllers
             return PartialView();
         }
 
-        //// POST: Admin/ProductGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Route("ProductGroups/Delete/{id}")]
         public ActionResult DeleteConfirmed(int id)
         {
             var pg = db.ProductGroupsRepository.GetById(id);
-            if (pg.ProductGroups1.Any())
-            {
-                var secSubGroups = db.AccountRepository.GetAllSubGroups(id).ToList();
-                foreach (var sec in secSubGroups)
-                {
-                    var thirdSubGroups = db.AccountRepository.GetAllSubGroups(sec.GroupId);
-                    foreach (var third in thirdSubGroups)
-                    {
-                        db.ProductGroupsRepository.Delete(third);
-                    }
 
-                    db.ProductGroupsRepository.Delete(sec);
+            //Deleting all the selected groups
+            var allPgs = db.ProductsCustomRepository.GetRelatedPgs(pg);
+            foreach (var subItem in allPgs)
+            {
+                foreach (var pgs in subItem.SelectedProductGroups.ToList())
+                {
+                    db.SelectedProductGroupRepository.Delete(pgs);
                 }
             }
+
+            //Delete the all the SubGroups
+            var allSubGroups = db.ProductsCustomRepository.GetRelatedPgs(pg).ToList();
+            if (allSubGroups.Any())
+            {
+                foreach (var item in allSubGroups)
+                {
+                    db.ProductGroupsRepository.Delete(item);
+                }
+            }
+
 
             db.ProductGroupsRepository.Delete(pg);
             db.Save();

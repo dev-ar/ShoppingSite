@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public int ProductId { get; set; }
 
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         [DisplayName("متن دیدگاه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]

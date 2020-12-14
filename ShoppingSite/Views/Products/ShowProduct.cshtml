@@ -11,13 +11,19 @@
 <div class="col-md-9 col-sm-8 left-side-content">
     <section class="single-page">
         <header><h3> @Model.ProductTitle  </h3> </header>
+ 
         <article>
             <!-- Detail -->
             <div class="col-md-8 col-sm-12 col-xs-12 pull-left detail-product">
                 <div>
                     <span id="FaFont"> @Model.Price.ToString("#,0 تومان") </span>
-                    <a href="" class="add-to-card-link border-radius"> افزودن به سبد خرید </a>
+                    <a style="cursor: pointer" onclick="AddToCart(@Model.ProductId)" class="add-to-card-link border-radius"> افزودن به سبد خرید </a>
+                  
                 </div>
+                <span>
+                    <i class="fa fa-star" style="color: gold"></i>
+                    @Model.ProductRate
+                </span>
                 <p>
                     @Model.ShortDescription
                 </p>
@@ -30,6 +36,7 @@
                 </div>
                 <div class="thumbnails-image">
                     <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-4 border-radius"><img class="border-radius" src="/Images/ProductImages/@Model.ImageName"></div>
                         @if (Model.ProductGalleries.Any())
                         {
                             foreach (var item in Model.ProductGalleries)
@@ -85,7 +92,7 @@
             <div id="comments" class="tab-pane fade">
                 <div class="comment-layer" id="FaFont">
                     @Html.Action("AddComment")
-                    <a href="@Url.Action("AddComment")">sas</a>
+
                     <ul class="comment-list" id="listComment">
                         @Html.Action("ShowComments")
 
@@ -103,7 +110,7 @@
     <section class="border-radius tags-layer">
         @foreach (var item in Model.ProductTags)
         {
-            <a href="">@item.Tag</a>
+            <a href="/Search?q=@item.Tag">@item.Tag</a>
         }
     </section>
 </div>
@@ -114,24 +121,19 @@
 
         function successComment() {
             $("#Text").val("");
+            $("#ParentId").val(null);
         }
-    </script>
 
-    <script>
         function Create(id) {
-            $.get("/Products/AddComment/" + @Model.ProductId + "?commentId=" + id,
-                function(result) {
-                    $("#modal").modal();
-                    $("#modalTitle").html("دیدگاه جدید");
-                    $("#modalBody").html(result);
-                });
+            $("#ParentId").val(id);
+            
         }
     </script>
 }
 
 
 <!-- Modal -->
-<!--<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -147,25 +149,7 @@
             </div>
         </div>
     </div>
-</div>-->
-<!-- End Modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody">
-            </div>
-        </div>
-    </div>
 </div>
-<!-- End Modal -->
 
 
 
@@ -173,20 +157,11 @@
 
 <style>
 
-
-    .rating-system2 {
-        width: auto;
-        display: inline-block;
-        margin: 20px;
-        position: relative;
-    }
-
-
-    input {
+    .Rate input {
         display: none;
     }
 
-    label {
+    .Rate label {
         float: left;
         display: inline-block;
         width: 20px;
@@ -196,6 +171,14 @@
         position: relative;
         transition: all .3s;
     }
+    .rating-system2 {
+        width: auto;
+        display: inline-block;
+        margin: 20px;
+        position: relative;
+    }
+
+
 
 
     .text {

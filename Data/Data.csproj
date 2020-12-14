@@ -96,6 +96,8 @@
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\IProductsCustomRepository.cs" />
+    <Compile Include="Repositories\ProductsCustomRepository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>

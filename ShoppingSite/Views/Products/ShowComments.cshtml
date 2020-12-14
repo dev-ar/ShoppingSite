@@ -6,7 +6,7 @@
     @foreach (var item in Model.Where(t => t.ParentId == null).ToList())
     {
         <li>
-            <a onclick="Create(@item.CommentId)" class="reply-button">پاسخ</a>
+            <a onclick="Create(@item.CommentId)" class="btn reply-button">پاسخ</a>
 
             <img src="/Content/img/avatar.jpg" width="65">
             <div>

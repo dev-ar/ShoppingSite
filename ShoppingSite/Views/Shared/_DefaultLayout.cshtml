@@ -27,7 +27,7 @@
                 <div class="clientarea" id="FaFont">
                     <ul>
                         @Html.Partial("_LoggedInUser")
-                        <li><a href=""><i class="fa fa-shopping-bag"></i> سبد خرید <span>10</span></a></li>
+                        <li><a href="/Shop"><i class="fa fa-shopping-bag"></i> سبد خرید <span id="ShopCount"></span></a></li>
                     </ul>
                 </div>
                 <!-- End Clientarea and Basket -->
@@ -69,20 +69,15 @@
         <div class="container">
             <span class="responsive-list"><i class="fa fa-th-list"></i></span>
             <ul>
-                <li><a href=""> منوی شماره یک </a></li>
-                <li><a href=""> منوی شماره یک </a></li>
-                <li><a href=""> منوی شماره یک </a></li>
-                <li><a href=""> منوی شماره یک </a></li>
-                <li><a href=""> منوی شماره یک </a></li>
-                <li><a href=""> منوی شماره یک </a></li>
-                <li><a href=""> منوی شماره یک </a></li>
+                <li><a href="/"> صفحه اصلی </a></li>
+                <li><a href="/Archive"> آرشیو محصولات </a></li>
             </ul>
 
             <!-- Search -->
             <div class="form-search">
                 <span><i class="fa fa-search"></i></span>
-                <form action="" method="get">
-                    <input type="text" class="border-radius" id="search">
+                <form action="/Search" method="get">
+                    <input name="q" type="text" class="border-radius" id="search">
                     <button type="submit" class="border-radius">جستجو</button>
                 </form>
             </div>
@@ -148,14 +143,16 @@
         </section>-->
         <!-- End compare -->
         <!-- Category -->
-        @RenderSection("Groups", false)
+        <aside class="col-md-3 col-sm-4 right-side-content">
+            @RenderSection("Filters", false)
+            @RenderSection("Groups", false)
 
-        <!-- End Category -->
-        <!-- Category -->
-        <!-- End Category -->
-        <!--</aside>-->
+            <!-- End Category -->
+            <!-- Category -->
+            <!-- End Category -->
+            <!--</aside>-->
 
-
+        </aside>
 
         @RenderBody()
 
@@ -238,8 +235,32 @@
     <script src="/Content/js/owl.carousel.js"></script>
     <script src="/Content/js/script.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js" integrity="sha512-DedNBWPF0hLGUPNbCYfj8qjlEnNE92Fqn7xd3Sscfu7ipy7Zu33unHdugqRD3c4Vj7/yLv+slqZhMls/4Oc7Zg==" crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js" integrity="sha512-DedNBWPF0hLGUPNbCYfj8qjlEnNE92Fqn7xd3Sscfu7ipy7Zu33unHdugqRD3c4Vj7/yLv+slqZhMls/4Oc7Zg==" crossorigin="anonymous"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>
+
+<script>
+
+    $(function () {
+        CountShopCart();
+    });
+
+
+    function CountShopCart() {
+        $.get("/api/ShoppingCart",
+            function (res) {
+                $("#ShopCount").html(res);
+            });
+    }
+
+
+    function AddToCart(id) {
+        $.get("/api/ShoppingCart/" + id,
+            function(res) {
+                $("#ShopCount").html(res);
+            });
+    }
+</script>
+

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Domain.Products>
+@{
+    ViewBag.Title = "Filter";
+}
+
+<style>
+    .filter input {
+        width: 100% !important
+    }
+
+    .filter label {
+        font-size: 15px
+    }
+</style>
+
+@section Filters
+{
+
+    <section class="border-radius category-side filter">
+        <header><h3> فیلتر‌ها</h3>  </header>
+        <article>
+            <form action="/Archive" id="filter-form">
+                <input type="hidden" name="pg" value="@ViewBag.pg" />
+                <input type="hidden" name="pageId" id="pageId" value="@ViewBag.pageId" />
+
+                <label class="control-label"> عنوان </label>
+                <input class="form-control" type="text" name="title" value="@ViewBag.Titles" />
+
+                <label class="control-label"> قیمت از </label>
+                <input class="form-control" type="number" name="minPrice" value="@ViewBag.minPrice" />
+
+                <label class="control-label"> قیمت تا </label>
+                <input class="form-control" type="number" name="maxPrice" value="@ViewBag.maxPrice" />
+
+
+
+
+
+                <br />
+                <input style="background-color: dodgerblue" class="btn" type="submit" value="فیلتر" />
+                <a style="width: 100%" class="btn btn-danger" href="/Archive"> حذف فیلترها</a>
+            </form>
+        </article>
+    </section>
+
+}
+
+@section Groups
+{
+    @Html.Action("ShowGroups", "Products")
+}
+
+
+
+
+<div class="col-md-9 col-sm-8 left-side-content">
+
+
+    <section class="last-products">
+        <header><h3> آٰرشیو محصولات </h3></header>
+        <article>
+            @foreach (var item in Model)
+            {
+                @Html.Partial("ProductPreview", item)
+            }
+
+            <div class="clearfix"></div>
+        </article>
+    </section>
+</div>
+
+@if (ViewBag.pageCount > 1)
+{
+    <div class="pagination-layer" style="margin-top: 50%">
+        <ul class="pagination">
+            @for (int i = 1; ViewBag.pageCount >= i; i++)
+            {
+                <li><a onclick="ChangePage(@i)">@i</a></li>
+            }
+
+        </ul>
+    </div>
+}
+
+<style>
+    .pagination li{
+        cursor: pointer;
+    }
+</style>
+@section Scripts
+{
+    <script>
+        function ChangePage(pageId) {
+            $("#pageId").val(pageId);
+            $("#filter-form").submit();
+        }
+    </script>
+}

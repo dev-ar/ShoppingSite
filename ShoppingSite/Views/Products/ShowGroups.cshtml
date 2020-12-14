@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Domain.ProductGroups>
-<aside class="col-md-3 col-sm-4 right-side-content">
 
     <section class="border-radius category-side">
         <header><h3> دسته بندی ها </h3></header>
@@ -8,19 +7,19 @@
                 @foreach (var item in Model.Where(g => g.ParentId == null))
                 {
                     <li >
-                        <h2 style="font-size: 35px;"><a href="">@item.GroupTitle</a></h2>
+                        <h2 style="font-size: 35px;"><a href="/Archive?pg=@item.GroupId">@item.GroupTitle</a></h2>
                         <br/>
                         <ul class="category-menu ">
                             @foreach (var subItem in Model.Where(g => g.ParentId == item.GroupId))
                             {
                                 <li >
-                                    <h2 style="font-size: 15px"><a href=""> @subItem.GroupTitle </a></h2>
+                                    <h2 style="font-size: 15px"><a href="/Archive?pg=@subItem.GroupId"> @subItem.GroupTitle </a></h2>
                                     <ul>
                                         @foreach (var thirdItem in Model.Where(g => g.ParentId == subItem.GroupId))
                                         {
 
                                             <li style="margin-right: 6px; margin-top: 3px">
-                                                <h2> <a href="">@thirdItem.GroupTitle</a> </h2>
+                                                <h2> <a href="/Archive?pg=@thirdItem.GroupId">@thirdItem.GroupTitle</a> </h2>
                                             </li>
 
                                         }
@@ -37,4 +36,4 @@
             </ul>
         </article>
     </section>
-</aside>
+

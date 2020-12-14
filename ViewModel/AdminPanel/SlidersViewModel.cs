@@ -6,21 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace ViewModel
 {
-    public class Slider
+    public class SlidersViewModel
     {
-        [Key]
-        public int SliderId { get; set; }
 
         [DisplayName("عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
         [MaxLength(300)]
         public string SliderTitle { get; set; }
-
-        [DisplayName("تصویر")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید.")]
-        public string ImageName { get; set; }
 
         [DisplayName("تاریخ شروع")]
         [Required]
@@ -41,5 +35,6 @@ namespace Domain
         [Url(ErrorMessage = "آدرس وارد شده معتبر نمی‌باشد.")]
         [MaxLength(450)]
         public string Url { get; set; }
+
     }
 }

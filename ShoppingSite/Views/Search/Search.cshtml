@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Domain.Products>
+@{
+    ViewBag.Title = "Search";
+}
+
+
+
+@section Groups
+{
+    @Html.Action("ShowGroups","Products")
+}
+
+<div class="col-md-9 col-sm-8 left-side-content">
+
+
+    <section class="last-products">
+        <header><h3> تعداد @Model.Count() محصول با کلمه "@ViewBag.search" یافت شد. </h3></header>
+        <article>
+            @foreach (var item in Model)
+            {
+                @Html.Partial("~/Views/Home/ProductPreview.cshtml", item)
+            }
+
+            <div class="clearfix"></div>
+        </article>
+    </section>
+</div>
